@@ -3,7 +3,7 @@
 // Copyright (C) 2016 liyunteng
 // Auther: liyunteng <li_yunteng@163.com>
 // License: GPL
-// Update time:  2016/12/28 18:46:00
+// Update time:  2016/12/29 10:51:22
 
 // This program is free software; you can redistribute it and/or modify
 // it under the terms and conditions of the GNU General Public License
@@ -44,6 +44,9 @@ using namespace std;
 // You should have received a copy of the GNU General Public License along
 // with this program; if not, write to the Free Software Foundation,
 // Inc.,51 Franklin St - Fifth Floor, Boston,MA 02110-1301 USA.
+
+#include <memory>
+using namespace std;
 
 int main(void)
 {

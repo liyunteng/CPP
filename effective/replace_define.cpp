@@ -5,7 +5,7 @@
  * Copyright (C) 2016 liyunteng
  * Auther: liyunteng <li_yunteng@163.com>
  * License: GPL
- * Update time:  2016/11/20 01:06:28
+ * Update time:  2016/12/29 16:47:49
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms and conditions of the GNU General Public License,
@@ -25,7 +25,8 @@
 #include <iostream>
 
 // #define Max(a, b) ((a) > (b) ? (a) : (b))
-template < typename T > inline T Max(const T & a, const T & b)
+template < typename T >
+inline T Max(const T & a, const T & b)
 {
     return a > b ? a : b;
 }
@@ -37,7 +38,7 @@ class CostEstimate {
     CostEstimate();
     virtual ~ CostEstimate();
   public:
-    static const double FudgeFactor;
+    const static double FudgeFactor;
     enum { NumTurns = 5 };
 };
 
