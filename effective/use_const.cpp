@@ -4,7 +4,7 @@
  * Copyright (C) 2016 liyunteng
  * Auther: liyunteng <li_yunteng@163.com>
  * License: GPL
- * Update time:  2016/11/20 06:13:54
+ * Update time:  2016/12/29 18:09:23
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms and conditions of the GNU General Public License,
@@ -26,26 +26,26 @@
 #include <string>
 
 class TextBlock {
-  public:
+public:
     TextBlock(const std::string & t):text(t) {
-    } virtual ~ TextBlock() {
+    }
+    virtual ~ TextBlock() {
     }
 
     const char &operator[] (std::size_t position) const {
-	return text[position];
+        return text[position];
     }
     // char &operator[](std::size_t position) {return text[position];}
-	char &operator[] (std::size_t position) {
-	return const_cast < char &>(static_cast < const TextBlock >
-				    (*this)[position]
-	    );
+    char &operator[] (std::size_t position) {
+        return const_cast <char &>(static_cast <const TextBlock>
+                                    (*this)[position]);
     }
 
     std::string Text(std::string ns) const {
-	text = ns;		// have const, but change text!!
-	return text;
-  } private:
-     mutable std::string text;	// mutable for Text(string)
+        text = ns;		// have const, but change text!!
+        return text;
+    } private:
+    mutable std::string text;	// mutable for Text(string)
 };
 
 void print(const TextBlock & ctb)
@@ -82,12 +82,12 @@ int main(void)
 
     std::vector < int >vec;
     for (int i = 0; i < 10; i++) {
-	vec.push_back(i);
+        vec.push_back(i);
     }
     std::vector < int >::const_iterator cit;
     for (cit = vec.begin(); cit != vec.end(); ++cit) {
-	std::cout << *cit << std::endl;
-	// *cit = 8;               // invalid, cit lick const T*
+        std::cout << *cit << std::endl;
+        // *cit = 8;               // invalid, cit lick const T*
     }
     const std::vector < int >::iterator it = vec.begin();
     *it = 10;
