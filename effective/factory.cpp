@@ -4,7 +4,7 @@
  * Copyright (C) 2016 liyunteng
  * Auther: liyunteng <li_yunteng@163.com>
  * License: GPL
- * Update time:  2016/11/20 06:47:08
+ * Update time:  2016/12/29 22:54:01
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms and conditions of the GNU General Public License,
@@ -29,10 +29,9 @@
 using std::cout;
 using std::endl;
 class IHuman {
-  public:
-    IHuman() {
-    } virtual ~ IHuman() {
-    }
+public:
+    IHuman() {}
+    virtual ~ IHuman() {}
 
     virtual void Laugh() = 0;
     virtual void Cry() = 0;
@@ -40,94 +39,90 @@ class IHuman {
 };
 
 class WhiteHuman:public IHuman {
-  public:
-    WhiteHuman() {
-    } virtual ~ WhiteHuman() {
-    }
+public:
+    WhiteHuman() {}
+    virtual ~ WhiteHuman() {}
+
     void Laugh() {
-	cout << "white human laugh" << endl;
+        cout << "white human laugh" << endl;
     }
     void Cry() {
-	cout << "white human cry" << endl;
+        cout << "white human cry" << endl;
     }
     void Talk() {
-	cout << "whit human talk" << endl;
+        cout << "whit human talk" << endl;
     }
 };
 
 class YelloHuman:public IHuman {
-  public:
-    YelloHuman() {
-    } virtual ~ YelloHuman() {
-	cout << "yello human delete" << endl;
+public:
+    YelloHuman() {}
+    virtual ~ YelloHuman() {
+        cout << "yello human delete" << endl;
     }
     void Laugh() {
-	cout << "yello human laugh" << endl;
+        cout << "yello human laugh" << endl;
     }
     void Cry() {
-	cout << "yello human cry" << endl;
+        cout << "yello human cry" << endl;
     }
     void Talk() {
-	cout << "yello human talk" << endl;
+        cout << "yello human talk" << endl;
     }
 };
 
 class BlackHuman:public IHuman {
-  public:
-    BlackHuman() {
-    } virtual ~ BlackHuman() {
-    }
+public:
+    BlackHuman() {}
+    virtual ~ BlackHuman() {}
     void Laugh() {
-	cout << "black human laugh" << endl;
+        cout << "black human laugh" << endl;
     }
     void Cry() {
-	cout << "black human cry" << endl;
+        cout << "black human cry" << endl;
     }
     void Talk() {
-	cout << "black human talk" << endl;
+        cout << "black human talk" << endl;
     }
 };
 
 
 
 class IHumanFactory {
-  public:
-    IHumanFactory() {
-    } virtual ~ IHumanFactory() {
-    }
+public:
+    IHumanFactory() {}
+    virtual ~ IHumanFactory() {}
 
     virtual IHuman *CreateHuman() = 0;
 };
 
 class WhiteHumanFactory:public IHumanFactory {
-  public:
-    WhiteHumanFactory() {
-    } virtual ~ WhiteHumanFactory() {
-    }
+public:
+    WhiteHumanFactory() {}
+    virtual ~ WhiteHumanFactory() {}
     IHuman *CreateHuman() {
-	return new WhiteHuman();
+        return new WhiteHuman();
     }
 };
 
 class YellowHumanFactory:public IHumanFactory {
-  public:
-    YellowHumanFactory() {
-    } virtual ~ YellowHumanFactory() {
-	cout << "yello human factory delete" << endl;
+public:
+    YellowHumanFactory() {}
+    virtual ~ YellowHumanFactory() {
+        cout << "yello human factory delete" << endl;
     }
 
     IHuman *CreateHuman() {
-	return new YelloHuman();
+        return new YelloHuman();
     }
 };
 
 class BlackHumanFactory:public IHumanFactory {
-  public:
-    BlackHumanFactory() {
-    } virtual ~ BlackHumanFactory() {
-    }
+public:
+    BlackHumanFactory() {}
+    virtual ~ BlackHumanFactory() {}
     IHuman *CreateHuman() {
-	return new BlackHuman();
+        return new BlackHuman();
     }
 };
 
@@ -146,9 +141,9 @@ void test()
 
 void test2()
 {
-    std::tr1::shared_ptr < IHumanFactory >
-	pHumanFactory(new YellowHumanFactory());
-    std::tr1::shared_ptr < IHuman > pHuman(pHumanFactory->CreateHuman());
+    std::tr1::shared_ptr <IHumanFactory >
+        pHumanFactory(new YellowHumanFactory());
+    std::tr1::shared_ptr <IHuman> pHuman(pHumanFactory->CreateHuman());
     pHuman->Cry();
     pHuman->Laugh();
     pHuman->Talk();
@@ -156,9 +151,9 @@ void test2()
 
 void test3()
 {
-    std::auto_ptr < IHumanFactory >
-	pHumanFactory(new YellowHumanFactory());
-    std::auto_ptr < IHuman > pHuman(pHumanFactory->CreateHuman());
+    std::auto_ptr <IHumanFactory>
+        pHumanFactory(new YellowHumanFactory());
+    std::auto_ptr <IHuman> pHuman(pHumanFactory->CreateHuman());
 
     pHuman->Cry();
     pHuman->Laugh();

@@ -4,7 +4,7 @@
  * Copyright (C) 2016 liyunteng
  * Auther: liyunteng <li_yunteng@163.com>
  * License: GPL
- * Update time:  2016/12/29 18:24:34
+ * Update time:  2016/12/29 21:48:16
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms and conditions of the GNU General Public License,
@@ -20,6 +20,10 @@
  * 51 Franklin St - Fifth Floor, Boston, MA 02110-1301 USA.
  *
  */
+
+// 1.自定义类确保手动初始化
+// 2.使用初始化列表,初始化列表顺序应与变量声明顺序一致
+// 3.non-local static 变量的初始化顺序不确定，可以变为local static变量
 
 #include <string>
 #include <list>
@@ -48,58 +52,4 @@ ABEntry::ABEntry(const std::string & name, const std::string & address,
     // theAddress = address;
     // thePhones = phones;
     // numTimesConsulted = 0;
-}
-
-class Singalton {
-public:
-    static Singalton & getInstance();
-    virtual ~ Singalton() {}
-    int data() const {
-        return m_data;
-    }
-private:
-    Singalton(int data):m_data(data) {}
-    Singalton(const Singalton &);
-    Singalton &operator= (const Singalton&);
-    static Singalton instance;
-    int m_data;
-};
-Singalton Singalton::instance = Singalton(1);
-Singalton & Singalton::getInstance()
-{
-    return instance;
-}
-
-class Signalton {
-public:
-    virtual ~Signalton(){ std::cout << __func__ << std::endl;}
-    static Signalton &getInstance() {
-        static Signalton instance(0);
-        return instance;
-    }
-
-    int data() {
-        return m_data;
-    }
-
-private:
-    Signalton(int data):m_data(data) {
-        std::cout << __func__ << std::endl;
-    }
-    Signalton(const Signalton&);
-    Signalton &operator=(const Signalton&);
-    int m_data;
-};
-
-int main(void)
-{
-
-    std::cout << "begin" << std::endl;
-    std::cout << Singalton::getInstance().data() << std::endl;
-
-    // std::cout << Signalton::getInstance().data() << std::endl;
-    Signalton &a = Signalton::getInstance();
-    std::cout << a.data() << std::endl;
-
-    return 0;
 }

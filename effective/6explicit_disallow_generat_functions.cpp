@@ -4,7 +4,7 @@
  * Copyright (C) 2016 liyunteng
  * Auther: liyunteng <li_yunteng@163.com>
  * License: GPL
- * Update time:  2016/11/20 04:18:06
+ * Update time:  2016/12/29 22:45:56
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms and conditions of the GNU General Public License,
@@ -22,32 +22,28 @@
  */
 
 class HomeForSale {
-  public:
-    HomeForSale() {
-    } virtual ~ HomeForSale() {
-    }
-  private:
+public:
+    HomeForSale() {}
+    virtual ~ HomeForSale() {}
+private:
     HomeForSale(const HomeForSale &);
     HomeForSale & operator=(const HomeForSale &);
 };
 
 class Uncopyable {
-  public:
-    Uncopyable() {
-    } ~Uncopyable() {
-    }
-  private:
+public:
+    Uncopyable() {}
+    ~Uncopyable() {}
+private:
     Uncopyable(const Uncopyable &);
     Uncopyable & operator=(const Uncopyable &);
 };
 
 class Test:public Uncopyable {
-  public:
-    Test();
-    virtual ~ Test();
+public:
+    Test(){}
+    virtual ~Test(){}
 };
-
-
 
 int main(void)
 {
