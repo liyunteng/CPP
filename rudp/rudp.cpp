@@ -1,0 +1,196 @@
+/*
+ * rudp.c - rudp
+ *
+ * Author : liyunteng <liyunteng@streamocean.com>
+ * Date   : 2019/07/14
+ *
+ * Copyright (C) 2019 StreamOcean, Inc.
+ * All rights reserved.
+ */
+
+#include "rudp.hpp"
+#include <cerrno>
+#include <cstring>
+#include <arpa/inet.h>
+
+namespace rudp {
+    const int RUDP_SOCKET_SND_BUFF_SIZE  = 1024 * 1024 * 1;
+    const int RUDP_SOCKET_RECV_BUFF_SIZE = 1024 * 1024 * 1;
+
+    const static std::map<Rudp::rudp_error_e, std::string> errMap = {
+        {Rudp::E_SUCCESS, "success"},
+        {Rudp::E_FAILED,  "failed"},
+        {Rudp::E_CREATE_SOCKET, "create socket failed"},
+        {Rudp::E_SEND_FAILED, "send failed"},
+        {Rudp::E_RECV_FAILED, "recv failed"},
+        {Rudp::E_BIND, "bind failed"},
+        {Rudp::E_CONNECT, "connect failed"},
+    };
+
+    const char *strerror(const Rudp::rudp_error_e err)
+    {
+        auto it = errMap.find(err);
+        if (it == errMap.end()) {
+            return "unknown";
+        }
+        return it->second.c_str();
+    }
+
+    size_t Rudp::sendData(const void *data, const size_t data_size, const rudp_addr_t * const to_addr)
+    {
+        if (m_sockfd == -1) {
+            return E_CREATE_SOCKET;
+        }
+
+        struct sockaddr_in *to = nullptr;
+        if (to_addr) {
+            to = (struct sockaddr_in *) m_malloc(sizeof(struct sockaddr_in));
+            to->sin_family = AF_INET;
+            to->sin_addr.s_addr = inet_addr(to_addr->ip.c_str());
+            to->sin_port = htons(to_addr->port);
+        }
+        size_t send_size = 0;
+        while (send_size < data_size) {
+            size_t ds = sendto(m_sockfd, (uint8_t *)data+send_size, data_size-send_size, 0,
+                               (struct sockaddr *)to, sizeof(to));
+            // size_t ds = send(m_sockfd, (uint8_t *)data+send_size, data_size - send_size, 0);
+            if (ds <= 0) {
+                if (m_log) {
+                    m_log(0, "sendto failed: %s", std::strerror(errno));
+                }
+                m_sendFailedPkgCount ++;
+                m_sendFailedByteCount += (data_size - send_size);
+                if (to) {
+                    m_free(to);
+                }
+                return E_SEND_FAILED;
+            }
+            send_size += ds;
+            m_sendPkgCount ++;
+            m_sendByteCount += ds;
+        }
+        if (to) {
+            m_free(to);
+        }
+        return send_size;
+    }
+
+    size_t Rudp::recvData(void *buff, const size_t buff_size, rudp_addr_t *from_addr)
+    {
+        if (m_sockfd == -1) {
+            return E_CREATE_SOCKET;
+        }
+        struct sockaddr_in *from = nullptr;
+        socklen_t len;
+        if (from_addr) {
+            from = (struct sockaddr_in *) m_malloc (sizeof(struct sockaddr_in));
+        }
+        size_t recv_size = 0;
+        while (recv_size < buff_size) {
+            size_t rs = recvfrom(m_sockfd, (uint8_t *)buff+recv_size, buff_size - recv_size, 0,
+                                 (struct sockaddr *)from, &len);
+            if (rs <= 0) {
+                if (m_log) {
+                    m_log(0, "recvfrom faile: %s", std::strerror(errno));
+                }
+                m_recvFailedPkgCount ++;
+                m_recvFailedByteCount += rs;
+                if (from) {
+                    m_free(from);
+                }
+                return E_RECV_FAILED;
+            }
+            recv_size += rs;
+            m_recvPkgCount ++;
+            m_recvByteCount += rs;
+        }
+        if (from_addr) {
+            from_addr->ip = std::string(inet_ntoa(from->sin_addr));
+            from_addr->port = ntohs(from->sin_port);
+        }
+        if (from) {
+            m_free(from);
+        }
+        return recv_size;
+    }
+
+    Rudp::rudp_error_e Rudp::createSocket(const rudp_addr_t * const my_addr,
+                                          const rudp_addr_t *const peer_addr)
+    {
+        m_sockfd = socket(AF_INET, SOCK_DGRAM, 0);
+        if (m_sockfd < 0) {
+            if (m_log) {
+                m_log(0, "create socket failed: %s", std::strerror(errno));
+            }
+            return E_CREATE_SOCKET;
+        }
+        if (my_addr) {
+            m_my_sock_addr.sin_family = AF_INET;
+            m_my_sock_addr.sin_addr.s_addr = inet_addr(my_addr->ip.c_str());
+            m_my_sock_addr.sin_port = htons(my_addr->port);
+            int rc = bind(m_sockfd, (struct sockaddr *)&m_my_sock_addr, sizeof(m_my_sock_addr));
+            if (rc < 0) {
+                if (m_log) {
+                    m_log(0, "bind failed: %s", std::strerror(errno));
+                }
+                return E_BIND;
+            }
+        }
+        if (peer_addr) {
+            m_peer_sock_addr.sin_family = AF_INET;
+            m_peer_sock_addr.sin_addr.s_addr = inet_addr(peer_addr->ip.c_str());
+            m_peer_sock_addr.sin_port = htons(peer_addr->port);
+            int rc = connect(m_sockfd, (struct sockaddr *)&m_peer_sock_addr, sizeof(m_peer_sock_addr));
+            if (rc < 0) {
+                if (m_log) {
+                    m_log(0, "connect failed: %s", std::strerror(errno));
+                }
+                return E_CONNECT;
+            }
+        }
+
+            return E_SUCCESS;
+    }
+    void Rudp::dump(void) {
+        if (m_log) {
+            m_log(0, "module: 0X%02X\n", m_module);
+            m_log(0, "sockfd: %d\n", m_sockfd);
+            m_log(0, "mss: %u\n", m_mss);
+            m_log(0, "mtu: %u\n", m_mtu);
+            m_log(0, "rtt: %u\n", m_rtt);
+            m_log(0, "rto: %u\n", m_rto);
+            m_log(0, "srtt: %u\n", m_srtt);
+
+            m_log(0, "sendPkg: %lu\n", m_sendPkgCount);
+            m_log(0, "sendByte: %lu\n", m_sendByteCount);
+            m_log(0, "recvPkg: %lu\n", m_recvPkgCount);
+            m_log(0, "recvByte: %lu\n", m_recvByteCount);
+            m_log(0, "lossPkg: %lu\n", m_lossPkgCount);
+            m_log(0, "lossByte: %lu\n", m_lossByteCount);
+            m_log(0, "sendFailedPkg: %lu\n", m_sendFailedPkgCount);
+            m_log(0, "sendFailedByte: %lu\n", m_sendFailedByteCount);
+        }
+    }
+    Rudp::Rudp(uint8_t module,
+               const rudp_addr_t * const my_addr,
+               const rudp_addr_t * const peer_addr,
+               rudp_malloc_handler malloc_handler,
+               rudp_free_handler free_handler,
+               rudp_log_handler log_handler)
+        : m_module(module),
+          m_sockfd(-1),
+          m_my_addr(my_addr),
+          m_peer_addr(peer_addr),
+          m_malloc(malloc_handler),
+          m_free(free_handler),
+          m_log(log_handler)
+    {
+        createSocket(my_addr, peer_addr);
+    }
+
+    Rudp::~Rudp()
+    {
+
+    }
+
+}
