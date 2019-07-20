@@ -59,18 +59,19 @@ int main(void)
         buf[i][127] = '\0';
         x++;
     }
-    size_t size = 0;
+    ssize_t size = 0;
 
     for (int i = 0; i < 64; i++)
     {
-        size = r->sendData(&buf[i], 128);
+        size = r->sendData(&buf[i], 128, &to_addr);
     }
     Rudp::rudp_addr_t from;
     char a[512] = {0};
-    if ((size = r->recvData(&a, sizeof(a), &from) > 0)) {
-        printf("recvfrom: %s:%d\n%s\n",
-               from.ip.c_str(),
-               from.port, a);
+    while ((size = r->recvData(&a, 511, &from)) > 0) {
+        // printf("recvfrom: %s:%d\n%s\n", from.ip.c_str(), from.port,
+        // a);
+        a[size] = '\0';
+        printf("%s\n", a);
     }
 
     r->dump();
