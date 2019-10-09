@@ -18,6 +18,7 @@ class base {
     }
 public:
     base() = default;
+    ~base() = default;
     base(std::array<T, N> v) : m_v(v) {}
     base<T, N> operator+(const base<T, N>&a) const {
         base<T, N> r;
@@ -40,7 +41,13 @@ public:
 
 
 class complex : public base<float, 2> {
+    friend std::ostream& operator<<(std::ostream&o, const complex &a) {
+        o << "(" << a.m_v[0] << (a.m_v[1] > 0 ? "+" : "-")
+          << (a.m_v[1] > 0 ? a.m_v[1] : -a.m_v[1]) << "i"<< ")";
+        return o;
+    }
 public:
+    ~complex() = default;
     complex(float r, float v) {
         m_v[0] = r;
         m_v[1] = v;
@@ -61,6 +68,7 @@ public:
 
 class triple : public base<float, 3> {
 public:
+    ~triple() = default;
     triple(float v0, float v1, float v2) {
         m_v[0] = v0;
         m_v[1] = v1;
@@ -84,6 +92,7 @@ class matrix {
 
 public:
     matrix() = default;
+    ~matrix() = default;
     matrix(std::vector<T> v): m_vec(v) {}
 
     matrix<T> operator+(const matrix<T>&a) const {

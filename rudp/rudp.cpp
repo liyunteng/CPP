@@ -1,12 +1,10 @@
-/*
- * rudp.c - rudp
- *
- * Author : liyunteng <liyunteng@streamocean.com>
- * Date   : 2019/07/14
- *
- * Copyright (C) 2019 StreamOcean, Inc.
- * All rights reserved.
- */
+// rudp.cpp - rudp
+
+// Author : liyunteng <liyunteng@streamocean.com>
+// Date   : 2019/07/28
+
+// Copyright (C) 2019 StreamOcean, Inc.
+// All rights reserved.
 
 #include "rudp.hpp"
 #include <arpa/inet.h>
@@ -98,25 +96,19 @@ Rudp::recvData(void *buff, const size_t buff_size, rudp_addr_t *from_addr)
     if (from_addr) {
         from = (struct sockaddr_in *)m_malloc(sizeof(struct sockaddr_in));
     }
-    size_t recv_size = 0;
-    while (recv_size < buff_size) {
-        size_t rs = recvfrom(m_sockfd, (uint8_t *)buff + recv_size, buff_size - recv_size, 0,
-                             (struct sockaddr *)from, &len);
-        if (rs <= 0) {
 
-            DEBUG(0, "recvfrom faile: %s", std::strerror(errno));
-
-            m_recvFailedPkgCount++;
-            m_recvFailedByteCount += rs;
-            if (from) {
-                m_free(from);
-            }
-            return E_RECV_FAILED;
+    ssize_t recv_size = recvfrom(m_sockfd, (uint8_t *)buff, buff_size, 0,
+                                 (struct sockaddr *)from, &len);
+    if (recv_size <= 0) {
+        DEBUG(0, "recvfrom faile: %s", std::strerror(errno));
+        m_recvFailedPkgCount++;
+        if (from) {
+            m_free(from);
         }
-        recv_size += rs;
-        m_recvPkgCount++;
-        m_recvByteCount += rs;
+        return E_RECV_FAILED;
     }
+    m_recvPkgCount++;
+    m_recvByteCount += recv_size;
     if (from_addr) {
         from_addr->ip   = std::string(inet_ntoa(from->sin_addr));
         from_addr->port = ntohs(from->sin_port);

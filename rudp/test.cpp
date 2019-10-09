@@ -66,8 +66,8 @@ int main(void)
         size = r->sendData(&buf[i], 128, &to_addr);
     }
     Rudp::rudp_addr_t from;
-    char a[512] = {0};
-    while ((size = r->recvData(&a, 511, &from)) > 0) {
+    char a[1024] = {0};
+    while ((size = r->recvData(&a, 1024, &from)) > 0) {
         // printf("recvfrom: %s:%d\n%s\n", from.ip.c_str(), from.port,
         // a);
         a[size] = '\0';
