@@ -25,28 +25,30 @@
 // 2.使用初始化列表,初始化列表顺序应与变量声明顺序一致
 // 3.non-local static 变量的初始化顺序不确定，可以变为local static变量
 
-#include <string>
-#include <list>
 #include <iostream>
+#include <list>
+#include <string>
 
-class ABEntry			// ABEntry = "Address Book Entry"
+class ABEntry  // ABEntry = "Address Book Entry"
 {
 public:
-    ABEntry(const std::string & name, const std::string & address,
-            const std::list < std::string > &phones);
-    virtual ~ ABEntry() {
-    }
+    ABEntry(const std::string &name, const std::string &address,
+            const std::list<std::string> &phones);
+    virtual ~ABEntry() {}
+
 private:
-    std::string theName;
-    std::string theAddress;
-    std::list < std::string > thePhones;
-    int numTimesConsulted;
+    std::string            theName;
+    std::string            theAddress;
+    std::list<std::string> thePhones;
+    int                    numTimesConsulted;
 };
 
-ABEntry::ABEntry(const std::string & name, const std::string & address,
-                 const std::list < std::string > &phones)
-    :theName(name),			// initialize
-     theAddress(address), thePhones(phones), numTimesConsulted(0)
+ABEntry::ABEntry(const std::string &name, const std::string &address,
+                 const std::list<std::string> &phones)
+    : theName(name),  // initialize
+      theAddress(address),
+      thePhones(phones),
+      numTimesConsulted(0)
 {
     // theName = name;             // use assignments not initailize
     // theAddress = address;

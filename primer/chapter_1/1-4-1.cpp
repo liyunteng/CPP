@@ -7,7 +7,8 @@
 // All rights reserved.
 #include <iostream>
 
-int main(void)
+int
+main(void)
 {
     int sum = 0, val = 1;
 

@@ -24,7 +24,8 @@
 #include <iostream>
 void simon(int);
 
-int main(int argc, char *argv[])
+int
+main(int argc, char *argv[])
 {
     using namespace std;
 
@@ -38,7 +39,8 @@ int main(int argc, char *argv[])
     return 0;
 }
 
-void simon(int n)
+void
+simon(int n)
 {
     using namespace std;
 

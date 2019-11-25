@@ -27,43 +27,50 @@
 using std::cout;
 using std::endl;
 
-class Base {
-  public:
-    Base() {
-    } virtual ~ Base() {
-    }
+class Base
+{
+public:
+    Base() {}
+    virtual ~Base() {}
 
-    virtual void mf1() {
-	cout << "base mf1" << endl;
+    virtual void mf1()
+    {
+        cout << "base mf1" << endl;
     }
-    void mf1(int i) {
-	cout << "base mf1(int): " << i << endl;
+    void mf1(int i)
+    {
+        cout << "base mf1(int): " << i << endl;
     }
-    virtual void mf2() {
-	cout << "base mf2" << endl;
+    virtual void mf2()
+    {
+        cout << "base mf2" << endl;
     }
-    void mf2(int i) {
-	cout << "base mf2(int): " << i << endl;
+    void mf2(int i)
+    {
+        cout << "base mf2(int): " << i << endl;
     }
 };
 
-class Derived:public Base {
-  public:
-    Derived() {
-    } virtual ~ Derived() {
-    }
+class Derived : public Base
+{
+public:
+    Derived() {}
+    virtual ~Derived() {}
     using Base::mf1;
     using Base::mf2;
-    virtual void mf1() {
-	cout << "derived mf1" << endl;
+    virtual void mf1()
+    {
+        cout << "derived mf1" << endl;
     }
     // void mf1(int i) { cout << "derived mf1(int): " << i << endl;}
-    virtual void mf2() {
-	cout << "derived mf2" << endl;
+    virtual void mf2()
+    {
+        cout << "derived mf2" << endl;
     }
 };
 
-int main(void)
+int
+main(void)
 {
     Derived d;
     d.mf1();

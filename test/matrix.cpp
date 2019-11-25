@@ -2,25 +2,27 @@
 // Build: g++ -o matrix matrix.cpp -g -Wall
 // Author: liyunteng<li_yunteng@163.com> 18510547821
 
-
 #include "matrix.hpp"
 #include <iostream>
 using namespace std;
-template<class T>
-void test_multi(const T &a, const T&b)
+template <class T>
+void
+test_multi(const T &a, const T &b)
 {
     T r = a * b;
     cout << a << "*" << b << "=" << r << endl;
 }
 
-template<class T>
-void test_add(const T &a, const T &b)
+template <class T>
+void
+test_add(const T &a, const T &b)
 {
     T r = a + b;
     cout << a << "+" << b << "=" << r << endl;
 }
 
-int main(void)
+int
+main(void)
 {
     test_add(complex(1.1, -2.1), complex(1.2, -2.1));
     test_multi(complex(1.1, -2.1), complex(1.1, -2.1));
@@ -40,17 +42,17 @@ int main(void)
     vector<complex> t3;
     t3.push_back(complex(1.1, 2.1));
     t3.push_back(complex(1.2, 2.2));
-    matrix<complex>mc1(t3);
+    matrix<complex> mc1(t3);
 
     vector<complex> t4;
     t4.push_back(complex(1.3, 2.3));
     t4.push_back(complex(1.4, 2.4));
-    matrix<complex>mc2(t4);
+    matrix<complex> mc2(t4);
 
     test_add(mc1, mc2);
-    test_multi(mc1,mc2);
+    test_multi(mc1, mc2);
 
     test_add(mt1, mt2);
-    test_multi(mt1 ,mt2);
+    test_multi(mt1, mt2);
     return 0;
 }

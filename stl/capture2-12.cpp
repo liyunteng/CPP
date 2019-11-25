@@ -21,22 +21,21 @@
  *
  */
 
+#include <cstdlib>
 #include <fstream>
 #include <iostream>
-#include <cstdlib>
 
-
-
-int main(void)
+int
+main(void)
 {
-    int i = 30;
+    int   i = 30;
     float f = 12.34;
-    char c;
+    char  c;
 
     std::fstream fl("sf", std::ios::out | std::ios::in);
     if (!fl) {
-	std::cerr << "The File Open Error." << std::endl;
-	std::exit(255);
+        std::cerr << "The File Open Error." << std::endl;
+        std::exit(255);
     }
     fl << "I=" << i << " ; F=" << f << std::endl;
     fl.seekp(std::ios::beg);

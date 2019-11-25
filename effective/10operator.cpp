@@ -28,64 +28,76 @@ using namespace std;
 class Widget
 {
 public:
-    explicit Widget(int data): m_data(data) {}
-    ~Widget(){}
+    explicit Widget(int data) : m_data(data) {}
+    ~Widget() {}
 
-    Widget(const Widget& rhs) : m_data(rhs.m_data){}
-    Widget (const Widget&& rhs) : m_data(rhs.m_data) {}
-    void swap(Widget& rhs) {
+    Widget(const Widget &rhs) : m_data(rhs.m_data) {}
+    Widget(const Widget &&rhs) : m_data(rhs.m_data) {}
+    void swap(Widget &rhs)
+    {
         std::cout << "refer" << std::endl;
-
     }
-    Widget& operator=(const Widget& rhs) {
+    Widget &operator=(const Widget &rhs)
+    {
         std::cout << "aaa" << std::endl;
         Widget tmp(std::move(rhs));
         swap(tmp);
         return *this;
     }
-    Widget& operator=(Widget&& rhs) {
+    Widget &operator=(Widget &&rhs)
+    {
         std::cout << "bbb" << std::endl;
         swap(rhs);
         return *this;
     }
-    friend ostream&operator<<(ostream&os, const Widget&w);
+    friend ostream &operator<<(ostream &os, const Widget &w);
+
 private:
     int m_data;
 };
 
-ostream&operator<<(ostream&os, const Widget& w)
+ostream &
+operator<<(ostream &os, const Widget &w)
 {
     return os << "data:" << w.m_data << std::endl;
 }
 
-
 struct Person {
-    Person(const char *p) {
+    Person(const char *p)
+    {
         cout << "constructor" << endl;
     }
-    Person(const Person&p ) {
+    Person(const Person &p)
+    {
         cout << "copy constructror" << endl;
     }
-    Person(Person&& p) {
+    Person(Person &&p)
+    {
         cout << "move copy constructor" << endl;
     }
-    const Person& operator=(const Person& p) {
-        cout << "operator=" <<endl;
+    const Person &operator=(const Person &p)
+    {
+        cout << "operator=" << endl;
         return *this;
     }
-    const Person& operator=(Person&& rhs) {
+    const Person &operator=(Person &&rhs)
+    {
         cout << "move operator=" << endl;
         return *this;
     }
-    ~Person() {
+    ~Person()
+    {
         cout << "destructor" << endl;
     }
 };
-Person getAlice() {
+Person
+getAlice()
+{
     Person p("alice");
     return p;
 }
-int main(void)
+int
+main(void)
 {
     // Widget w(0);
     // Widget w1(1);
@@ -101,7 +113,7 @@ int main(void)
 
     cout << "__________" << endl;
     Person a = Person("");
-    a = getAlice();
+    a        = getAlice();
     cout << "__________" << endl;
     a = getAlice();
     cout << "__________" << endl;

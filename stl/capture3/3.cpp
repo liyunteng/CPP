@@ -21,16 +21,19 @@
  *
  */
 
-#include <string>
 #include <iostream>
+#include <string>
 using namespace std;
 
-template < typename T > void print(const T & var)
+template <typename T>
+void
+print(const T &var)
 {
     cout << var << endl;
 }
 
-int main(void)
+int
+main(void)
 {
     string str("hello world");
 

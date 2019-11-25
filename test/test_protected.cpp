@@ -25,42 +25,48 @@
 
 using namespace std;
 
-class A {
-  public:
-    int i = 1;
-    void print_i() {
-	cout << "a i: " << i << endl;
-	print_j();
-	print_k();
-  } protected:
-    int j = 2;
-    void print_j() {
-	cout << "a j: " << j << endl;
+class A
+{
+public:
+    int  i = 1;
+    void print_i()
+    {
+        cout << "a i: " << i << endl;
+        print_j();
+        print_k();
     }
-  private:
-    int k = 3;
-    void print_k() {
-	cout << "a k: " << k << endl;
+protected:
+    int  j = 2;
+    void print_j()
+    {
+        cout << "a j: " << j << endl;
+    }
+
+private:
+    int  k = 3;
+    void print_k()
+    {
+        cout << "a k: " << k << endl;
     }
 };
 
-
-class B:public A {
+class B : public A
+{
     /* friend class A; */
-  public:
+public:
     void B_print_j(A *);
-
 };
 
-void B::B_print_j(A * a)
+void
+B::B_print_j(A *a)
 {
     cout << "b a->i: " << a->i << endl;
     a->print_i();
     print_j();
-
 }
 
-int main(int argc, char *argv[])
+int
+main(int argc, char *argv[])
 {
     A a;
     B b;

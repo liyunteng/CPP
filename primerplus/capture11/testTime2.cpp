@@ -24,7 +24,8 @@
 #include "mytime2.hpp"
 #include <iostream>
 
-int main(void)
+int
+main(void)
 {
     using std::cout;
     using std::endl;
@@ -45,7 +46,7 @@ int main(void)
     cout << "weeding - waxing time = " << diff;
 
     // adjust = total * 1.5;       // operator*
-    adjust = 1.5 * total;	// friend operator*
+    adjust = 1.5 * total;  // friend operator*
     cout << "adjuset work time = " << adjust;
 
     return 0;

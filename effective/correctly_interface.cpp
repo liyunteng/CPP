@@ -23,74 +23,79 @@
 
 #include <iostream>
 
-class Year {
-  public:
-    explicit Year(int y):year(y) {
-    } virtual ~ Year() {
+class Year
+{
+public:
+    explicit Year(int y) : year(y) {}
+    virtual ~Year() {}
+    int get() const
+    {
+        return year;
     }
-    int get() const {
-	return year;
-  } private:
+private:
     int year;
 };
 
-class Month {
-  public:
+class Month
+{
+public:
     enum MOUNTHS {
-	Jan = 1,
-	Feb = 2,
-	March = 3,
-	Apr = 4,
-	May = 5,
-	June = 6,
-	July = 7,
-	Aug = 8,
-	Sep = 9,
-	Oct = 10,
-	Nov = 11,
-	Dec = 12,
+        Jan   = 1,
+        Feb   = 2,
+        March = 3,
+        Apr   = 4,
+        May   = 5,
+        June  = 6,
+        July  = 7,
+        Aug   = 8,
+        Sep   = 9,
+        Oct   = 10,
+        Nov   = 11,
+        Dec   = 12,
     };
-    explicit Month(MOUNTHS m):month(m) {
-    } virtual ~ Month() {
+    explicit Month(MOUNTHS m) : month(m) {}
+    virtual ~Month() {}
+    int get() const
+    {
+        return month;
     }
-    int get() const {
-	return month;
-  } private:
+private:
     int month;
 };
 
-class Day {
-  public:
-    explicit Day(int d):day(d) {
-    } virtual ~ Day() {
-    }
+class Day
+{
+public:
+    explicit Day(int d) : day(d) {}
+    virtual ~Day() {}
 
-    int get() const {
-	return day;
-  } private:
+    int get() const
+    {
+        return day;
+    }
+private:
     int day;
 };
 
+class Date
+{
+public:
+    Date(const Month &m, const Day &d, const Year &y) : month(m), day(d), year(y) {}
+    virtual ~Date() {}
 
-class Date {
-  public:
-    Date(const Month & m, const Day & d, const Year & y)
-    :month(m), day(d), year(y) {
-    } virtual ~ Date() {
+    void show()
+    {
+        std::cout << year.get() << "/" << month.get() << "/" << day.get() << std::endl;
     }
 
-    void show() {
-	std::cout << year.get() << "/" << month.get() << "/" << day.
-	    get() << std::endl;
-    }
-  private:
-    const Month & month;
-    const Day & day;
+private:
+    const Month &month;
+    const Day &  day;
     const Year & year;
 };
 
-
-int main(void)
+int
+main(void)
 {
     Date d(Month(Month::Apr), Day(20), Year(1920));
     d.show();

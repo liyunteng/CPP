@@ -7,7 +7,8 @@
 // All rights reserved.
 #include <iostream>
 
-int main(void)
+int
+main(void)
 {
     int small = 0, big = 0;
     std::cout << "please input two interfers: ";
@@ -15,8 +16,8 @@ int main(void)
 
     if (small > big) {
         int tmp = small;
-        small = std::move(big);
-        big = tmp;
+        small   = std::move(big);
+        big     = tmp;
     }
 
     for (int i = small; i <= big; i++) {

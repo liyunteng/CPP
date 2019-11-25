@@ -20,12 +20,13 @@
  * 51 Franklin St - Fifth Floor, Boston, MA 02110-1301 USA.
  *
  */
-#include <string>
 #include <iostream>
+#include <string>
 
 using namespace std;
 
-int main(void)
+int
+main(void)
 {
     string s1;
     cout << "Please enter an sentence: ";

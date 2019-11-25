@@ -20,23 +20,24 @@
  * 51 Franklin St - Fifth Floor, Boston, MA 02110-1301 USA.
  *
  */
-#include <zmq.h>
-#include "so_log.h"
 #include "functions.hpp"
+#include "so_log.h"
+#include <zmq.h>
 
 #define ENDPOINT "tcp://localhost:1234"
 
-#define CHECK()                                 \
-    if (!inited) {                              \
-        iHiLog::error("Functions not init.");   \
-        return ERR_NOT_INIT;                    \
+#define CHECK()                               \
+    if (!inited) {                            \
+        iHiLog::error("Functions not init."); \
+        return ERR_NOT_INIT;                  \
     }
 
-int Functions::getReturn()
+int
+Functions::getReturn()
 {
     int ret;
     int buf = 0;
-    ret = zmq_recv(request, &buf, sizeof(buf), 0);
+    ret     = zmq_recv(request, &buf, sizeof(buf), 0);
     if (ret == -1) {
         iHiLog::error("zmq_recv failed: %s.", zmq_strerror(errno));
         return errno;
@@ -46,7 +47,8 @@ int Functions::getReturn()
     return buf;
 }
 
-int Functions::avSetEncIFramePeriod(const char *period)
+int
+Functions::avSetEncIFramePeriod(const char *period)
 {
     CHECK();
 
@@ -69,13 +71,14 @@ int Functions::avSetEncIFramePeriod(const char *period)
     return getReturn();
 }
 
-int Functions::avSetEncBitsRate(const char *bits)
+int
+Functions::avSetEncBitsRate(const char *bits)
 {
     CHECK();
 
     int ret;
-    if (strlen(bits) >= VIDEO_ENC_PARAM_LEN){
-	    iHiLog::error("avSetEncBitsRate args invalid.");
+    if (strlen(bits) >= VIDEO_ENC_PARAM_LEN) {
+        iHiLog::error("avSetEncBitsRate args invalid.");
         return ERR_ARG_INVALID;
     }
 
@@ -93,7 +96,8 @@ int Functions::avSetEncBitsRate(const char *bits)
     return getReturn();
 }
 
-int Functions::avSetEncSolution(const char *width, const char *height)
+int
+Functions::avSetEncSolution(const char *width, const char *height)
 {
     CHECK();
 
@@ -104,7 +108,7 @@ int Functions::avSetEncSolution(const char *width, const char *height)
     }
 
     ParamAVSetEncSolution solution;
-    solution.h.cmd =  CMD_AVSETENC_SOLUTION;
+    solution.h.cmd = CMD_AVSETENC_SOLUTION;
     memcpy(solution.width, width, sizeof(solution.width));
     memcpy(solution.height, height, sizeof(solution.height));
     ret = zmq_send(request, &solution, sizeof(solution), 0);
@@ -118,11 +122,12 @@ int Functions::avSetEncSolution(const char *width, const char *height)
     return getReturn();
 }
 
-int Functions::avSetLayout(picture pic[4])
+int
+Functions::avSetLayout(picture pic[4])
 {
     CHECK();
 
-    int ret;
+    int              ret;
     ParamSetAVLayout layout;
     layout.h.cmd = CMD_AVSETLAYOUT;
     memcpy(layout.pictures, pic, sizeof(layout.pictures));
@@ -138,48 +143,46 @@ int Functions::avSetLayout(picture pic[4])
     return getReturn();
 }
 
-int Functions::avSetLayoutPip(int stream1, int stream2)
+int
+Functions::avSetLayoutPip(int stream1, int stream2)
 {
-	picture layout[4] = {
-            {0, 0, 1920, 1080, stream1, 1},
-            {1280, 720, 640, 360, stream2, 1},
-            {0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0}
-        };
+    picture layout[4] = {{0, 0, 1920, 1080, stream1, 1},
+                         {1280, 720, 640, 360, stream2, 1},
+                         {0, 0, 0, 0, 0, 0},
+                         {0, 0, 0, 0, 0, 0}};
 
     return avSetLayout(layout);
 }
-int Functions::avSetLayout3(int stream1, int stream2, int stream3)
+int
+Functions::avSetLayout3(int stream1, int stream2, int stream3)
 {
-        picture layout[4] = {
-            {480, 0, 950, 530, stream1, 1},
-            {0, 540, 950, 530, stream2, 1},
-            {960, 540, 950, 530, stream3, 0},
-            {0, 0, 0, 0, 0, 0}
-    };
-
-    return avSetLayout(layout);
-}
-
-int Functions::avSetLayout4(int stream1, int stream2, int stream3, int stream4)
-{
-        picture layout[4] = {
-            {0, 0, 950, 530, stream1, 1},
-            {960, 0, 950, 530, stream2, 1},
-            {0, 540, 950, 530, stream3, 0},
-            {960, 540, 950, 530, stream4, 0}
-    };
+    picture layout[4] = {{480, 0, 950, 530, stream1, 1},
+                         {0, 540, 950, 530, stream2, 1},
+                         {960, 540, 950, 530, stream3, 0},
+                         {0, 0, 0, 0, 0, 0}};
 
     return avSetLayout(layout);
 }
 
-int Functions::avStart()
+int
+Functions::avSetLayout4(int stream1, int stream2, int stream3, int stream4)
+{
+    picture layout[4] = {{0, 0, 950, 530, stream1, 1},
+                         {960, 0, 950, 530, stream2, 1},
+                         {0, 540, 950, 530, stream3, 0},
+                         {960, 540, 950, 530, stream4, 0}};
+
+    return avSetLayout(layout);
+}
+
+int
+Functions::avStart()
 {
     CHECK()
 
-    int ret;
+    int          ret;
     ParamAVStart av_start = {CMD_AVSTART};
-    ret = zmq_send(request, &av_start, sizeof(av_start), 0);
+    ret                   = zmq_send(request, &av_start, sizeof(av_start), 0);
     if (ret == -1) {
         iHiLog::error("zmq_send failed: %s.", zmq_strerror(errno));
         return errno;
@@ -190,7 +193,8 @@ int Functions::avStart()
     return getReturn();
 }
 
-int Functions::init()
+int
+Functions::init()
 {
     int ret;
     context = zmq_ctx_new();
@@ -216,11 +220,7 @@ int Functions::init()
     return 0;
 }
 
-Functions::Functions():
-    context(NULL), request(NULL), inited(false)
-{
-
-}
+Functions::Functions() : context(NULL), request(NULL), inited(false) {}
 
 Functions::~Functions()
 {

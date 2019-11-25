@@ -21,10 +21,11 @@
  *
  */
 
-#include <iostream>
 #include "mytime1.hpp"
+#include <iostream>
 
-int main(void)
+int
+main(void)
 {
     using std::cout;
     using std::endl;

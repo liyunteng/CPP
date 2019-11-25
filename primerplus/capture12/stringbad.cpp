@@ -37,7 +37,7 @@ StringBad::StringBad(const char *s)
     cout << num_strings << " : \"" << str << "\" object created\n";
 }
 
-StringBad::StringBad(StringBad & s)
+StringBad::StringBad(StringBad &s)
 {
     len = std::strlen(s.str);
     str = new char[len + 1];
@@ -60,14 +60,15 @@ StringBad::~StringBad()
     cout << "\"" << str << "\" object deleted, ";
     --num_strings;
     cout << num_strings << " left\n";
-    delete[]str;
+    delete[] str;
 }
 
-StringBad & StringBad::operator=(const StringBad & rhs)
+StringBad &
+StringBad::operator=(const StringBad &rhs)
 {
     // Check for self-assignment!
     if (this == &rhs)
-	return *this;
+        return *this;
     delete str;
     len = std::strlen(rhs.str);
     str = new char[len + 1];
@@ -76,7 +77,8 @@ StringBad & StringBad::operator=(const StringBad & rhs)
     return *this;
 }
 
-std::ostream & operator<<(std::ostream & os, const StringBad & c)
+std::ostream &
+operator<<(std::ostream &os, const StringBad &c)
 {
     os << c.str;
     return os;

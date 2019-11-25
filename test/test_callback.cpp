@@ -2,33 +2,39 @@
 
 using namespace std;
 
-typedef int (*callback) ();
+typedef int (*callback)();
 
-class CallbackTest {
-  public:
-    CallbackTest() {
-    } static int thunk() {
-	if (0 != is)
-	    std::cout << "callback test" << std::endl;
+class CallbackTest
+{
+public:
+    CallbackTest() {}
+    static int thunk()
+    {
+        if (0 != is)
+            std::cout << "callback test" << std::endl;
     }
 
-    callback getEntry() {
-	return (callback) thunk;
+    callback getEntry()
+    {
+        return (callback)thunk;
     }
-    int get_ab() {
-	return lyt;
+    int get_ab()
+    {
+        return lyt;
     }
     static int is;
-  private:
+
+private:
     const static int lyt = 2;
 };
 
 int CallbackTest::is = 1;
-int main(int argc, const char *argv[])
+int
+main(int argc, const char *argv[])
 {
     class CallbackTest test;
 
-    //std::cout << CallbackTest::is << std::endl;
+    // std::cout << CallbackTest::is << std::endl;
 
     callback fp = test.getEntry();
     fp();

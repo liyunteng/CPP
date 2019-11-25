@@ -24,15 +24,16 @@
 #include "stonwt.hpp"
 #include <iostream>
 
-void StonWt::showStn() const const
+void
+StonWt::showStn() const const
 {
     std::cout << pounds << " pounds\n";
 }
 
-void StonWt::showLbs() const const
+void
+StonWt::showLbs() const const
 {
-    std::cout << stone << " stone, " << pds_left << " pounds." << std::
-	endl;
+    std::cout << stone << " stone, " << pds_left << " pounds." << std::endl;
 }
 
 StonWt::StonWt()
@@ -42,19 +43,16 @@ StonWt::StonWt()
 
 StonWt::StonWt(int stn, double lbs)
 {
-    stone = stn;
+    stone    = stn;
     pds_left = lbs;
-    pounds = stn * Lbs_per_stn + pds_left;
+    pounds   = stn * Lbs_per_stn + pds_left;
 }
 
 StonWt::StonWt(double lbs)
 {
-    stone = int (lbs) / Lbs_per_stn;
-    pds_left = int (lbs) % Lbs_per_stn;
-    pounds = lbs;
+    stone    = int(lbs) / Lbs_per_stn;
+    pds_left = int(lbs) % Lbs_per_stn;
+    pounds   = lbs;
 }
 
-StonWt::~StonWt()
-{
-
-}
+StonWt::~StonWt() {}

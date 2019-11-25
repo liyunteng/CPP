@@ -5,15 +5,17 @@
 
 // Copyright (C) 2019 StreamOcean, Inc.
 // All rights reserved.
-#include <iostream>
-#include <fstream>
-#include <string>
-#include <google/protobuf/util/time_util.h>
 #include "person.pb.h"
+#include <fstream>
+#include <google/protobuf/util/time_util.h>
+#include <iostream>
+#include <string>
 using namespace std;
 using google::protobuf::util::TimeUtil;
 
-void PromptForAddress(test::Person *person) {
+void
+PromptForAddress(test::Person *person)
+{
     cout << "Enter person ID number: ";
     int id;
     cin >> id;
@@ -30,7 +32,7 @@ void PromptForAddress(test::Person *person) {
         person->set_email(email);
     }
 
-    while(true) {
+    while (true) {
         cout << "Enter a phone number (or leave blank to finish): ";
         string number;
         getline(cin, number);
@@ -57,7 +59,9 @@ void PromptForAddress(test::Person *person) {
     *person->mutable_last_updated() = TimeUtil::SecondsToTimestamp(time(NULL));
 }
 
-void ListPeople(const test::AddressBook &ab)  {
+void
+ListPeople(const test::AddressBook &ab)
+{
     for (int i = 0; i < ab.people_size(); i++) {
         const test::Person &person = ab.people(i);
 
@@ -69,7 +73,7 @@ void ListPeople(const test::AddressBook &ab)  {
 
         for (int j = 0; j < person.phones_size(); j++) {
             const test::Person::PhoneNumber &pn = person.phones(j);
-            switch(pn.type()) {
+            switch (pn.type()) {
             case test::Person::MOBILE:
                 cout << "  Mobile phone #: ";
                 break;
@@ -91,7 +95,8 @@ void ListPeople(const test::AddressBook &ab)  {
     }
 }
 
-int main(int argc, char *argv[])
+int
+main(int argc, char *argv[])
 {
     GOOGLE_PROTOBUF_VERIFY_VERSION;
     string filename = "./tmp";

@@ -97,8 +97,8 @@ Rudp::recvData(void *buff, const size_t buff_size, rudp_addr_t *from_addr)
         from = (struct sockaddr_in *)m_malloc(sizeof(struct sockaddr_in));
     }
 
-    ssize_t recv_size = recvfrom(m_sockfd, (uint8_t *)buff, buff_size, 0,
-                                 (struct sockaddr *)from, &len);
+    ssize_t recv_size =
+        recvfrom(m_sockfd, (uint8_t *)buff, buff_size, 0, (struct sockaddr *)from, &len);
     if (recv_size <= 0) {
         DEBUG(0, "recvfrom faile: %s", std::strerror(errno));
         m_recvFailedPkgCount++;

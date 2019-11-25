@@ -25,25 +25,29 @@
 #include <iostream>
 
 // #define Max(a, b) ((a) > (b) ? (a) : (b))
-template < typename T >
-inline T Max(const T & a, const T & b)
+template <typename T>
+inline T
+Max(const T &a, const T &b)
 {
     return a > b ? a : b;
 }
 
 // #define FudgeFactor  1.35
 // #define NumTurn 5
-class CostEstimate {
-  public:
+class CostEstimate
+{
+public:
     CostEstimate();
-    virtual ~ CostEstimate();
-  public:
+    virtual ~CostEstimate();
+
+public:
     const static double FudgeFactor;
     enum { NumTurns = 5 };
 };
 
 const double CostEstimate::FudgeFactor = 1.35;
-int main(void)
+int
+main(void)
 {
     std::cout << CostEstimate::FudgeFactor << std::endl;
     std::cout << CostEstimate::NumTurns << std::endl;

@@ -23,17 +23,18 @@
 
 #include "ringBuffer.hpp"
 #include <iostream>
-int main(void)
+int
+main(void)
 {
-    ringBuffer < int >rb(10);
+    ringBuffer<int> rb(10);
 
     for (size_t i = 0; i < rb.size(); i++) {
-	std::cout << "push " << i << std::endl;
-	rb.push(i);
+        std::cout << "push " << i << std::endl;
+        rb.push(i);
     }
     rb.push(-1);
     for (size_t i = 0; i < rb.size(); i++) {
-	std::cout << rb.pop() << std::endl;
+        std::cout << rb.pop() << std::endl;
     }
     std::cout << "size: " << rb.size() << std::endl;
 

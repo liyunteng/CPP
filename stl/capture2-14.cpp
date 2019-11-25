@@ -21,12 +21,13 @@
  *
  */
 
-#include <fstream>
 #include <cassert>
+#include <fstream>
 #include <iostream>
 
 using namespace std;
-int main(int argc, char *argv[])
+int
+main(int argc, char *argv[])
 {
     assert(argc == 2);
     ifstream in(argv[1]);

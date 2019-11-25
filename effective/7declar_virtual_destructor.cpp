@@ -22,7 +22,8 @@
 // 2.不是base类的 析构不要加virtual，影响性能
 // 3.抽象基类,可通过纯虚析构来定义， 并为纯虚析构实现个定义
 
-class AWOV {
+class AWOV
+{
 public:
     virtual ~AWOV() = 0;
 };
@@ -34,10 +35,11 @@ class A : public AWOV
 {
 public:
     A() {}
-    ~A(){}
+    ~A() {}
 };
 
-int main(void)
+int
+main(void)
 {
     A a;
     return 0;

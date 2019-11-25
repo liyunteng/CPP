@@ -21,31 +21,37 @@
  *
  */
 
-class HomeForSale {
+class HomeForSale
+{
 public:
     HomeForSale() {}
-    virtual ~ HomeForSale() {}
+    virtual ~HomeForSale() {}
+
 private:
     HomeForSale(const HomeForSale &);
-    HomeForSale & operator=(const HomeForSale &);
+    HomeForSale &operator=(const HomeForSale &);
 };
 
-class Uncopyable {
+class Uncopyable
+{
 public:
     Uncopyable() {}
     ~Uncopyable() {}
+
 private:
     Uncopyable(const Uncopyable &);
-    Uncopyable & operator=(const Uncopyable &);
+    Uncopyable &operator=(const Uncopyable &);
 };
 
-class Test:public Uncopyable {
+class Test : public Uncopyable
+{
 public:
-    Test(){}
-    virtual ~Test(){}
+    Test() {}
+    virtual ~Test() {}
 };
 
-int main(void)
+int
+main(void)
 {
     HomeForSale h1;
     // HomeForSale h2(h1);         // disable copy ct

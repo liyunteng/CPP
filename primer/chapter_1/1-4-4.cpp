@@ -7,7 +7,8 @@
 // All rights reserved.
 #include <iostream>
 
-int main(void)
+int
+main(void)
 {
     int currVal = 0, val = 0;
 
@@ -17,14 +18,12 @@ int main(void)
             if (val == currVal)
                 ++cnt;
             else {
-                std::cout << currVal << " occurs "
-                          << cnt << " times" << std::endl;
+                std::cout << currVal << " occurs " << cnt << " times" << std::endl;
                 currVal = val;
-                cnt = 1;
+                cnt     = 1;
             }
         }
-        std::cout << currVal << " occurs "
-                  << cnt << " times" << std::endl;
+        std::cout << currVal << " occurs " << cnt << " times" << std::endl;
     }
     return 0;
 }

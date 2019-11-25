@@ -21,11 +21,12 @@
  *
  */
 
-#include <string>
 #include <iostream>
+#include <string>
 using namespace std;
 
-int main(void)
+int
+main(void)
 {
 
     string Mystring1(10, ' ');

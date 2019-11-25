@@ -21,18 +21,20 @@
  *
  */
 
-#include <iostream>
 #include "stonwt.hpp"
+#include <iostream>
 using std::cout;
-void display(const StonWt & st, int n)
+void
+display(const StonWt &st, int n)
 {
     for (int i = 0; i < n; i++) {
-	cout << "Wow! ";
-	st.showStn();
+        cout << "Wow! ";
+        st.showStn();
     }
 }
 
-int main(void)
+int
+main(void)
 {
 
     StonWt incognito = 275;
@@ -45,7 +47,7 @@ int main(void)
     wolfe.showStn();
     taft.showLbs();
     incognito = 276.8;
-    taft = 325;
+    taft      = 325;
     cout << "After dinner, the celebrity weighed ";
     incognito.showStn();
     cout << "After dinner, the President weighed ";

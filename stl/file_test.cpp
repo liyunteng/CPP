@@ -21,11 +21,12 @@
  *
  */
 
-#include <iostream>
 #include <fstream>
+#include <iostream>
 using namespace std;
 
-int main(void)
+int
+main(void)
 {
     ifstream f1;
     ofstream f2;
@@ -43,8 +44,8 @@ int main(void)
     f1.open(filename1, ios_base::in);
     f2.open(filename2, ios_base::out);
     while (!f1.eof()) {
-	f1.getline(content, 128);
-	f2 << content << endl;
+        f1.getline(content, 128);
+        f2 << content << endl;
     }
     f1.close();
     f2.close();

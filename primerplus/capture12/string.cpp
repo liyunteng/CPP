@@ -28,7 +28,8 @@ using std::cout;
 
 int String::num_strings = 0;
 
-int String::HowMany()
+int
+String::HowMany()
 {
     return num_strings;
 }
@@ -43,13 +44,13 @@ String::String(const char *s)
 
 String::String()
 {
-    len = 4;
-    str = new char[1];
+    len    = 4;
+    str    = new char[1];
     str[0] = '\0';
     num_strings++;
 }
 
-String::String(const String & s)
+String::String(const String &s)
 {
     num_strings++;
     len = s.len;
@@ -60,65 +61,74 @@ String::String(const String & s)
 String::~String()
 {
     --num_strings;
-    delete[]str;
+    delete[] str;
 }
 
-String & String::operator=(const String & s)
+String &
+String::operator=(const String &s)
 {
     if (this == &s)
-	return *this;
+        return *this;
 
-    delete[]str;
+    delete[] str;
     len = s.len;
     str = new char[len + 1];
     std::strcpy(str, s.str);
     return *this;
 }
 
-String & String::operator=(const char *s)
+String &
+String::operator=(const char *s)
 {
-    delete[]str;
+    delete[] str;
     len = std::strlen(s);
     str = new char[len + 1];
     std::strcpy(str, s);
     return *this;
 }
 
-char &String::operator[] (int i) {
+char &String::operator[](int i)
+{
     return str[i];
 }
 
-const char &String::operator[] (int i)
-const {
+const char &String::operator[](int i) const
+{
     return str[i];
-} bool operator<(const String & s1, const String & s2)
+}
+bool
+operator<(const String &s1, const String &s2)
 {
     return (std::strcmp(s1.str, s2.str) < 0);
 }
 
-bool operator>(const String & s1, const String & s2)
+bool
+operator>(const String &s1, const String &s2)
 {
     return s2 < s1;
 }
 
-bool operator==(const String & s1, const String & s2)
+bool
+operator==(const String &s1, const String &s2)
 {
     return (std::strcmp(s1.str, s2.str) == 0);
 }
 
-ostream & operator<<(ostream & os, const String & s)
+ostream &
+operator<<(ostream &os, const String &s)
 {
     os << s.str;
     return os;
 }
 
-istream & operator>>(istream & is, String & s)
+istream &
+operator>>(istream &is, String &s)
 {
     char temp[String::CINLIM];
     is.get(temp, String::CINLIM);
     if (is)
-	s = temp;
+        s = temp;
     while (is && is.get() != '\n')
-	continue;
+        continue;
     return is;
 }

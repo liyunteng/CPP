@@ -21,20 +21,20 @@
  *
  */
 
-#include <iostream>
-#include <vector>
 #include <algorithm>
+#include <iostream>
 #include <iterator>
-
+#include <vector>
 
 using namespace std;
 
-int main(int argc, char *argv[])
+int
+main(int argc, char *argv[])
 {
-    typedef vector < int >int_vector;
-    typedef istream_iterator < int >istream_itr;
-    typedef ostream_iterator < int >ostream_itr;
-    typedef back_insert_iterator < int_vector > back_ins_itr;
+    typedef vector<int>                      int_vector;
+    typedef istream_iterator<int>            istream_itr;
+    typedef ostream_iterator<int>            ostream_itr;
+    typedef back_insert_iterator<int_vector> back_ins_itr;
 
     int_vector num;
 

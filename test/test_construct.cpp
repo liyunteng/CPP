@@ -5,31 +5,50 @@
 
 // Copyright (C) 2019 StreamOcean, Inc.
 // All rights reserved.
-#include <string>
 #include <iostream>
+#include <string>
 
-class Test {
+class Test
+{
 public:
-    Test(){ std::cout << __PRETTY_FUNCTION__ << std::endl; }
+    Test()
+    {
+        std::cout << __PRETTY_FUNCTION__ << std::endl;
+    }
     // const
-    Test(const std::string &v) : m_val(v) { std::cout << __PRETTY_FUNCTION__<< std::endl; }
-    Test(const Test&t): m_val(t.m_val){std::cout << __PRETTY_FUNCTION__<< std::endl;}
-    Test &operator=(const Test &t) {
+    Test(const std::string &v) : m_val(v)
+    {
+        std::cout << __PRETTY_FUNCTION__ << std::endl;
+    }
+    Test(const Test &t) : m_val(t.m_val)
+    {
+        std::cout << __PRETTY_FUNCTION__ << std::endl;
+    }
+    Test &operator=(const Test &t)
+    {
         m_val = t.m_val;
         std::cout << __PRETTY_FUNCTION__ << std::endl;
         return *this;
     }
 
     // non-const
-    Test(std::string &v): m_val(v) { std::cout << __PRETTY_FUNCTION__ << std::endl; }
-    Test(Test&t): m_val(t.m_val){std::cout << __PRETTY_FUNCTION__ << std::endl;}
-    Test &operator=(Test &t) {
+    Test(std::string &v) : m_val(v)
+    {
+        std::cout << __PRETTY_FUNCTION__ << std::endl;
+    }
+    Test(Test &t) : m_val(t.m_val)
+    {
+        std::cout << __PRETTY_FUNCTION__ << std::endl;
+    }
+    Test &operator=(Test &t)
+    {
         m_val = t.m_val;
-        std::cout << __PRETTY_FUNCTION__<< std::endl;
+        std::cout << __PRETTY_FUNCTION__ << std::endl;
         return *this;
     }
 
-    ~Test() {
+    ~Test()
+    {
         std::cout << __PRETTY_FUNCTION__ << std::endl;
     }
 
@@ -37,32 +56,37 @@ private:
     std::string m_val;
 };
 
-void test1(Test a)
+void
+test1(Test a)
 {
     (void)a;
 }
-void test2(const Test a)
+void
+test2(const Test a)
 {
     (void)a;
 }
-void testx(Test &a)
+void
+testx(Test &a)
 {
     (void)a;
 }
 
-void testx(const Test&a)
+void
+testx(const Test &a)
 {
     (void)a;
 }
-int main(void)
+int
+main(void)
 {
-    Test a;
-    Test b("abc");
+    Test        a;
+    Test        b("abc");
     std::string s = "xxx";
-    Test c(s);
-    Test d(c);
-    const Test e(d);
-    Test f(e);
+    Test        c(s);
+    Test        d(c);
+    const Test  e(d);
+    Test        f(e);
 
     std::cout << "===========" << std::endl;
 

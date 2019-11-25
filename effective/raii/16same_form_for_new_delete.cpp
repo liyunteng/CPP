@@ -18,6 +18,5 @@
 // with this program; if not, write to the Free Software Foundation,
 // Inc.,51 Franklin St - Fifth Floor, Boston,MA 02110-1301 USA.
 
-
 // 在new表达式中使用[],必须在相应的delete表达式中也使用[].
 // 在new表达式中不使用[], 必须不在相应的delete表达式中使用[].

@@ -23,11 +23,13 @@ using namespace std;
 class Base
 {
 public:
-    Base(){}
-    ~Base(){}
-    void show() {
+    Base() {}
+    ~Base() {}
+    void show()
+    {
         cout << __func__ << endl;
     }
+
 private:
 };
 
@@ -36,7 +38,8 @@ class Derived : private Base
 public:
     Derived() {}
     ~Derived() {}
-    void a() {
+    void a()
+    {
         this->show();
     }
 };
@@ -53,6 +56,7 @@ class Widget
 public:
     Widget();
     ~Widget();
+
 private:
     class WidgetTimer : public Timer
     {
@@ -62,7 +66,8 @@ private:
     WidgetTimer timer;
 };
 
-int main(void)
+int
+main(void)
 {
     // 不能多态
     // Base *pd = new Derived();

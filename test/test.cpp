@@ -6,8 +6,8 @@
 // Copyright (C) 2019 StreamOcean, Inc.
 // All rights reserved.
 
-#include <string>
 #include <iostream>
+#include <string>
 using namespace std;
 
 const string str = "(1 + 2) * 3 + 4";
@@ -15,7 +15,8 @@ const string str = "(1 + 2) * 3 + 4";
 #define _SYMBOL(s) #s
 #define SYMBOL(s) _SYMBOL(s)
 
-int main(void)
+int
+main(void)
 {
     cout << SYMBOL(str);
     return 0;

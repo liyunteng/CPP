@@ -21,25 +21,24 @@
  *
  */
 
-#include <zmq.hpp>
-#include <stdlib.h>
-#include <stdio.h>
-#include <unistd.h>
 #include <iostream>
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <zmq.hpp>
 
+#define within(num) (int)((float)(num)*random() / (RAND_MAX + 1.0))
 
-#define within(num) (int)((float)(num) * random() / (RAND_MAX + 1.0))
-
-int main(int argc, char *argv[])
+int
+main(int argc, char *argv[])
 {
     zmq::context_t context(1);
-    zmq::socket_t sender(context, ZMQ_PUSH);
+    zmq::socket_t  sender(context, ZMQ_PUSH);
     sender.bind("tcp://*:5557");
 
     std::cout << "Press Enter when the woekers are ready: " << std::endl;
     getchar();
     std::cout << "Sending tasks to workers..." << std::endl;
-
 
     zmq::socket_t sink(context, ZMQ_PUSH);
     sink.connect("tcp://localhost:5558");
@@ -47,23 +46,22 @@ int main(int argc, char *argv[])
     memcpy(message.data(), "0", 1);
     sink.send(message);
 
-    srandom((unsigned) time(NULL));
+    srandom((unsigned)time(NULL));
 
     int task_nbr;
     int total_msec = 0;
     for (task_nbr = 0; task_nbr < 100; task_nbr++) {
-	int workload;
-	workload = within(100) + 1;
-	total_msec += workload;
+        int workload;
+        workload = within(100) + 1;
+        total_msec += workload;
 
-	message.rebuild(10);
-	memset(message.data(), '\0', 10);
-	sprintf((char *) message.data(), "%d", workload);
-	sender.send(message);
+        message.rebuild(10);
+        memset(message.data(), '\0', 10);
+        sprintf((char *)message.data(), "%d", workload);
+        sender.send(message);
     }
 
-    std::cout << "Total expected cost: " << total_msec << " msec" << std::
-	endl;
+    std::cout << "Total expected cost: " << total_msec << " msec" << std::endl;
     sleep(1);
 
     return 0;

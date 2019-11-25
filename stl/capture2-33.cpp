@@ -23,17 +23,19 @@
 
 #include <iostream>
 
-void f() throw()
+void
+f() throw()
 {
     throw 1;
 }
 
-int main(void)
+int
+main(void)
 {
     try {
-	f();
-    } catch( ...) {
-	std::cout << "catch int: " << std::endl;
+        f();
+    } catch (...) {
+        std::cout << "catch int: " << std::endl;
     }
 
     return 0;

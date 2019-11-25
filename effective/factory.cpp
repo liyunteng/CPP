@@ -25,112 +25,131 @@
 #include <memory>
 #include <tr1/memory>
 
-
 using std::cout;
 using std::endl;
-class IHuman {
+class IHuman
+{
 public:
     IHuman() {}
-    virtual ~ IHuman() {}
+    virtual ~IHuman() {}
 
     virtual void Laugh() = 0;
-    virtual void Cry() = 0;
-    virtual void Talk() = 0;
+    virtual void Cry()   = 0;
+    virtual void Talk()  = 0;
 };
 
-class WhiteHuman:public IHuman {
+class WhiteHuman : public IHuman
+{
 public:
     WhiteHuman() {}
-    virtual ~ WhiteHuman() {}
+    virtual ~WhiteHuman() {}
 
-    void Laugh() {
+    void Laugh()
+    {
         cout << "white human laugh" << endl;
     }
-    void Cry() {
+    void Cry()
+    {
         cout << "white human cry" << endl;
     }
-    void Talk() {
+    void Talk()
+    {
         cout << "whit human talk" << endl;
     }
 };
 
-class YelloHuman:public IHuman {
+class YelloHuman : public IHuman
+{
 public:
     YelloHuman() {}
-    virtual ~ YelloHuman() {
+    virtual ~YelloHuman()
+    {
         cout << "yello human delete" << endl;
     }
-    void Laugh() {
+    void Laugh()
+    {
         cout << "yello human laugh" << endl;
     }
-    void Cry() {
+    void Cry()
+    {
         cout << "yello human cry" << endl;
     }
-    void Talk() {
+    void Talk()
+    {
         cout << "yello human talk" << endl;
     }
 };
 
-class BlackHuman:public IHuman {
+class BlackHuman : public IHuman
+{
 public:
     BlackHuman() {}
-    virtual ~ BlackHuman() {}
-    void Laugh() {
+    virtual ~BlackHuman() {}
+    void Laugh()
+    {
         cout << "black human laugh" << endl;
     }
-    void Cry() {
+    void Cry()
+    {
         cout << "black human cry" << endl;
     }
-    void Talk() {
+    void Talk()
+    {
         cout << "black human talk" << endl;
     }
 };
 
-
-
-class IHumanFactory {
+class IHumanFactory
+{
 public:
     IHumanFactory() {}
-    virtual ~ IHumanFactory() {}
+    virtual ~IHumanFactory() {}
 
     virtual IHuman *CreateHuman() = 0;
 };
 
-class WhiteHumanFactory:public IHumanFactory {
+class WhiteHumanFactory : public IHumanFactory
+{
 public:
     WhiteHumanFactory() {}
-    virtual ~ WhiteHumanFactory() {}
-    IHuman *CreateHuman() {
+    virtual ~WhiteHumanFactory() {}
+    IHuman *CreateHuman()
+    {
         return new WhiteHuman();
     }
 };
 
-class YellowHumanFactory:public IHumanFactory {
+class YellowHumanFactory : public IHumanFactory
+{
 public:
     YellowHumanFactory() {}
-    virtual ~ YellowHumanFactory() {
+    virtual ~YellowHumanFactory()
+    {
         cout << "yello human factory delete" << endl;
     }
 
-    IHuman *CreateHuman() {
+    IHuman *CreateHuman()
+    {
         return new YelloHuman();
     }
 };
 
-class BlackHumanFactory:public IHumanFactory {
+class BlackHumanFactory : public IHumanFactory
+{
 public:
     BlackHumanFactory() {}
-    virtual ~ BlackHumanFactory() {}
-    IHuman *CreateHuman() {
+    virtual ~BlackHumanFactory() {}
+    IHuman *CreateHuman()
+    {
         return new BlackHuman();
     }
 };
 
-
-void test()
+void
+test()
 {
     IHumanFactory *pHumanFactory = new YellowHumanFactory();
-    IHuman *pHuman = pHumanFactory->CreateHuman();
+    IHuman *       pHuman        = pHumanFactory->CreateHuman();
     pHuman->Cry();
     pHuman->Laugh();
     pHuman->Talk();
@@ -139,28 +158,29 @@ void test()
     delete pHumanFactory;
 }
 
-void test2()
+void
+test2()
 {
-    std::tr1::shared_ptr <IHumanFactory >
-        pHumanFactory(new YellowHumanFactory());
-    std::tr1::shared_ptr <IHuman> pHuman(pHumanFactory->CreateHuman());
+    std::tr1::shared_ptr<IHumanFactory> pHumanFactory(new YellowHumanFactory());
+    std::tr1::shared_ptr<IHuman>        pHuman(pHumanFactory->CreateHuman());
     pHuman->Cry();
     pHuman->Laugh();
     pHuman->Talk();
 }
 
-void test3()
+void
+test3()
 {
-    std::auto_ptr <IHumanFactory>
-        pHumanFactory(new YellowHumanFactory());
-    std::auto_ptr <IHuman> pHuman(pHumanFactory->CreateHuman());
+    std::auto_ptr<IHumanFactory> pHumanFactory(new YellowHumanFactory());
+    std::auto_ptr<IHuman>        pHuman(pHumanFactory->CreateHuman());
 
     pHuman->Cry();
     pHuman->Laugh();
     pHuman->Talk();
 }
 
-int main(void)
+int
+main(void)
 {
     test3();
     return 0;

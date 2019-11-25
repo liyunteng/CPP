@@ -26,27 +26,30 @@ using namespace std;
 class Shape
 {
 public:
-    enum ShapeColor {Red, Green, Blue};
+    enum ShapeColor { Red, Green, Blue };
     virtual void draw(ShapeColor color = Red) const = 0;
 };
 
-class Rectangle: public Shape
+class Rectangle : public Shape
 {
 public:
-    virtual void draw(ShapeColor color = Green) const {
+    virtual void draw(ShapeColor color = Green) const
+    {
         cout << "color: " << color << endl;
     }
 };
 
-class Cricle: public Shape
+class Cricle : public Shape
 {
 public:
-    virtual void draw(ShapeColor color) const {
+    virtual void draw(ShapeColor color) const
+    {
         cout << "color: " << color << endl;
     }
 };
 
-int main(void)
+int
+main(void)
 {
     Shape *pc = new Cricle;
     Shape *pr = new Rectangle;

@@ -21,54 +21,55 @@
  *
  */
 
-#include <iostream>
+#include "vector.hpp"
 #include <cstdlib>
 #include <ctime>
-#include "vector.hpp"
+#include <iostream>
 
-int main(void)
+int
+main(void)
 {
     using namespace std;
     using VECTOR::Vector;
 
     srand(time(0));
-    double direction;
-    Vector step;
-    Vector result(0.0, 0.0);
+    double        direction;
+    Vector        step;
+    Vector        result(0.0, 0.0);
     unsigned long steps = 0;
-    double target;
-    double dstep;
+    double        target;
+    double        dstep;
 
     std::cout << "Enter target distance (q to quit): ";
     while (cin >> target) {
-	std::cout << "Enter step length: ";
-	if (!(cin >> dstep))
-	    break;
+        std::cout << "Enter step length: ";
+        if (!(cin >> dstep))
+            break;
 
-	while (result.magVal() < target) {
-	    direction = rand() % 360;
-	    step.reset(dstep, direction, Vector::POL);
-	    result = result + step;
-	    steps++;
-	}
-	std::cout << "After " << steps << " steps, the subject "
-	    "has the following location:\n";
-	cout << result << endl;
+        while (result.magVal() < target) {
+            direction = rand() % 360;
+            step.reset(dstep, direction, Vector::POL);
+            result = result + step;
+            steps++;
+        }
+        std::cout << "After " << steps
+                  << " steps, the subject "
+                     "has the following location:\n";
+        cout << result << endl;
 
-	result.polarMode();
-	cout << " or\n" << result << endl;
-	cout << "Average outward distance per step = "
-	    << result.magVal() / steps << endl;
-	steps = 0;
-	result.reset(0.0, 0.0);
-	cout << "Enter target distance (q to quit): ";
+        result.polarMode();
+        cout << " or\n" << result << endl;
+        cout << "Average outward distance per step = " << result.magVal() / steps << endl;
+        steps = 0;
+        result.reset(0.0, 0.0);
+        cout << "Enter target distance (q to quit): ";
     }
 
     cout << "Bye!\n";
     cin.clear();
 
     while (cin.get() != '\n')
-	continue;
+        continue;
 
     return 0;
 }

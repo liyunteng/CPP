@@ -23,28 +23,31 @@
 // 表)或member initialization list(成员初值列表)内以它作为base class修饰符
 
 #include <iostream>
-#include <vector>
 #include <list>
 #include <string>
+#include <vector>
 
-template<typename T>
-void print2nd(const T& container)
+template <typename T>
+void
+print2nd(const T &container)
 {
     // traits
-    typedef typename std::iterator_traits<typename T::const_iterator>::value_type  value_type;
+    typedef typename std::iterator_traits<typename T::const_iterator>::value_type value_type;
     if (container.size() >= 2) {
         typename T::const_iterator iter(container.begin());
         ++iter;
         // int value = *iter;
         value_type value(*iter);
-        std::cout << value << std::endl;;
+        std::cout << value << std::endl;
+        ;
     }
 }
 
-int main(void)
+int
+main(void)
 {
     std::vector<std::string> v;
-    std::list<std::string> l;
+    std::list<std::string>   l;
     for (int i = 0; i < 3; i++) {
         v.push_back(std::to_string(i));
         l.push_back(std::to_string(i));

@@ -25,35 +25,33 @@
 #include <iostream>
 using namespace std;
 
-class Mypimpl {
-  private:
+class Mypimpl
+{
+private:
     static const int i = 10;
-  public:
-    void print_myi();
 
+public:
+    void print_myi();
 };
 
-void Mypimpl::print_myi()
+void
+Mypimpl::print_myi()
 {
     cout << "i: " << i << endl;
 }
 
-A::A():pimpl(new Mypimpl)
-{
+A::A() : pimpl(new Mypimpl) {}
 
-}
+A::~A() {}
 
-A::~A()
-{
-
-}
-
-void A::print_i()
+void
+A::print_i()
 {
     pimpl->print_myi();
 }
 
-int main(int argc, char *argv[])
+int
+main(int argc, char *argv[])
 {
     A a;
     a.print_i();

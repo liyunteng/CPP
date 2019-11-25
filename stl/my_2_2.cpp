@@ -21,23 +21,24 @@
  *
  */
 
-#include <vector>
 #include <algorithm>
 #include <iostream>
+#include <vector>
 
 using namespace std;
-int main(int argc, char *argv[])
+int
+main(int argc, char *argv[])
 {
-    vector < int >num;
-    int n;
+    vector<int> num;
+    int         n;
 
     while (cin >> n)
-	num.push_back(n);
+        num.push_back(n);
 
     sort(num.begin(), num.end());
 
     for (int i = 0; i < num.size(); i++)
-	cout << num[i] << "\t";
+        cout << num[i] << "\t";
     cout << endl;
 
     return 0;

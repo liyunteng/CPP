@@ -24,10 +24,12 @@ using namespace std;
 class CompanyA
 {
 public:
-    void sendCleartext(const string &msg) {
-        cout << __func__  <<  msg << endl;
+    void sendCleartext(const string &msg)
+    {
+        cout << __func__ << msg << endl;
     }
-    void sendEncrypted(const string &msg) {
+    void sendEncrypted(const string &msg)
+    {
         cout << __func__ << msg << endl;
     }
 };
@@ -35,56 +37,64 @@ public:
 class CompanyB
 {
 public:
-    void sendCleartext(const string &msg) {
+    void sendCleartext(const string &msg)
+    {
         cout << __FUNCTION__ << msg << endl;
     }
-    void sendEncrypted(const string &msg) {
+    void sendEncrypted(const string &msg)
+    {
         cout << __FUNCTION__ << msg << endl;
     }
 };
 class CompanyZ
 {
 public:
-    void sendEncrypted(const string &msg) {
+    void sendEncrypted(const string &msg)
+    {
         cout << __FUNCTION__ << msg << endl;
     }
 };
 
-template<typename Company>
+template <typename Company>
 class MsgSender
 {
 public:
-    void sendClear(const string& msg) {
+    void sendClear(const string &msg)
+    {
         Company c;
         c.sendCleartext(msg);
     }
-    void sendSecret(const string& msg) {
+    void sendSecret(const string &msg)
+    {
         Company c;
         c.sendEncrypted(msg);
     }
 };
 // 特化
-template<>
+template <>
 class MsgSender<CompanyZ>
 {
 public:
-    void sendSecret(const string& msg) {
+    void sendSecret(const string &msg)
+    {
         CompanyZ c;
         c.sendEncrypted(msg);
     }
 };
 
-template<typename Company>
+template <typename Company>
 class LogingMsgSender : public MsgSender<Company>
 {
 public:
     // 告诉编译器，请它假设sendClear位于base class中
     using MsgSender<Company>::sendClear;
-    void sendClearMsg(const string& msg) {
+    void sendClearMsg(const string &msg)
+    {
         cout << "do loging" << endl;
         sendClear(msg);
     }
-    void sendSecretMsg(const string& msg) {
+    void sendSecretMsg(const string &msg)
+    {
         cout << "do loging" << endl;
         // 假设sendEncrypted将被继承
         // this->sendEncrypted(msg);
@@ -92,17 +102,19 @@ public:
     }
 };
 
-template<>
+template <>
 class LogingMsgSender<CompanyZ> : public MsgSender<CompanyZ>
 {
 public:
-    void sendSecretMsg(const string& msg) {
+    void sendSecretMsg(const string &msg)
+    {
         cout << "do loging" << endl;
         this->sendSecret(msg);
     }
 };
 
-int main(void)
+int
+main(void)
 {
     LogingMsgSender<CompanyA> senderA;
     senderA.sendClearMsg("abc");

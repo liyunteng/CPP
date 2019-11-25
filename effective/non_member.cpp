@@ -21,35 +21,38 @@
  *
  */
 
-class Rational {
-  public:
-    Rational(int numerator = 0, int denominator = 1)
-  :	num(numerator), den(denominator) {
-    } int numberator() const {
-	return num;
-    } int denominator() const {
-	return den;
-    } virtual ~ Rational() {
+class Rational
+{
+public:
+    Rational(int numerator = 0, int denominator = 1) : num(numerator), den(denominator) {}
+    int numberator() const
+    {
+        return num;
     }
+    int denominator() const
+    {
+        return den;
+    }
+    virtual ~Rational() {}
 
-  private:
+private:
     int num;
     int den;
 };
 
-const Rational operator*(const Rational & lhs, const Rational & rhs)
+const Rational operator*(const Rational &lhs, const Rational &rhs)
 {
-    return Rational(lhs.numberator() * rhs.numberator(),
-		    lhs.denominator() * rhs.denominator());
+    return Rational(lhs.numberator() * rhs.numberator(), lhs.denominator() * rhs.denominator());
 }
 
-int main(void)
+int
+main(void)
 {
     Rational a(1, 8);
     Rational b(1, 2);
     Rational result = a * b;
-    result = result * b;
-    result = a * 2;
-    result = 2 * a;
+    result          = result * b;
+    result          = a * 2;
+    result          = 2 * a;
     return 0;
 }

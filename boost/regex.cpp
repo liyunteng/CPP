@@ -20,31 +20,32 @@
  * 51 Franklin St - Fifth Floor, Boston, MA 02110-1301 USA.
  *
  */
-#include <cstdlib>
-#include <boost/regex.hpp>
-#include <string>
-#include <iostream>
 #include "regex.hpp"
+#include <boost/regex.hpp>
+#include <cstdlib>
+#include <iostream>
+#include <string>
 
 using namespace std;
 using namespace boost;
 
 regex expression("^select([a-zA-z ]*)from([a-zA-Z ]*)");
 
-int main(void)
+int
+main(void)
 {
     std::string in;
-    cmatch what;
+    cmatch      what;
 
     cout << "Enter testing string: " << endl;
     getline(cin, in);
 
     if (regex_match(in.c_str(), what, expression)) {
-	for (size_t i = 0; i < what.size(); i++) {
-	    cout << "str: " << what[i] << endl;
-	}
+        for (size_t i = 0; i < what.size(); i++) {
+            cout << "str: " << what[i] << endl;
+        }
     } else {
-	cout << "not found" << endl;
+        cout << "not found" << endl;
     }
 
     return 0;

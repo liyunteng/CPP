@@ -19,8 +19,8 @@
 // with this program; if not, write to the Free Software Foundation,
 // Inc.,51 Franklin St - Fifth Floor, Boston,MA 02110-1301 USA.
 
-#include <iostream>
 #include <functional>
+#include <iostream>
 
 using namespace std;
 
@@ -28,10 +28,11 @@ using namespace std;
 class GameCharacter
 {
 public:
-    explicit GameCharacter(int data): m_data(data) {}
+    explicit GameCharacter(int data) : m_data(data) {}
     ~GameCharacter() {}
 
-    int healthValue() const {
+    int healthValue() const
+    {
         // ...
         cout << "before healthValue" << endl;
         int retVal = doHealthValue();
@@ -39,9 +40,11 @@ public:
         // ...
         return retVal;
     }
+
 private:
     // NVI non-virtual interface
-    virtual int doHealthValue() const {
+    virtual int doHealthValue() const
+    {
         // ...
         cout << "Base data:" << m_data << endl;
         return m_data;
@@ -52,11 +55,12 @@ private:
 class GamePeople : public GameCharacter
 {
 public:
-    explicit GamePeople(int data): GameCharacter(data), m_data(data) {}
-    ~GamePeople(){}
+    explicit GamePeople(int data) : GameCharacter(data), m_data(data) {}
+    ~GamePeople() {}
 
 private:
-    virtual int doHealthValue() const {
+    virtual int doHealthValue() const
+    {
         cout << "derived data:" << m_data + 1 << endl;
         return m_data + 1;
     }
@@ -65,7 +69,8 @@ private:
 
 ////////// function pointer //////////
 class Base;
-int defaultHealthCalc(const Base &)
+int
+defaultHealthCalc(const Base &)
 {
     cout << __func__ << endl;
     return 0;
@@ -75,14 +80,15 @@ class Base
 public:
     // function pointer
     // typedef int(*HealthCalcFunc)(const Base&);
-    typedef std::function<int(const Base&)> HealthCalcFunc;
-    explicit Base(HealthCalcFunc hcf = defaultHealthCalc)
-        : healthFunc(hcf) {}
-    ~Base(){}
+    typedef std::function<int(const Base &)> HealthCalcFunc;
+    explicit Base(HealthCalcFunc hcf = defaultHealthCalc) : healthFunc(hcf) {}
+    ~Base() {}
 
-    int healthValue() const {
+    int healthValue() const
+    {
         return healthFunc(*this);
     }
+
 private:
     HealthCalcFunc healthFunc;
 };
@@ -90,44 +96,50 @@ private:
 class Derived : public Base
 {
 public:
-    explicit Derived(HealthCalcFunc hcf = defaultHealthCalc)
-        :Base(hcf) {}
+    explicit Derived(HealthCalcFunc hcf = defaultHealthCalc) : Base(hcf) {}
     ~Derived() {}
 };
 
-int loseHealthQuickly(const Base&)
+int
+loseHealthQuickly(const Base &)
 {
     cout << __func__ << endl;
     return 1;
 }
 
-int loseHealthSlowly(const Base&)
+int
+loseHealthSlowly(const Base &)
 {
     cout << __func__ << endl;
     return 2;
 }
 
-short calcHealth(const Base&)
+short
+calcHealth(const Base &)
 {
     cout << __func__ << endl;
     return 3;
 }
 
 struct HealthCalculator {
-    int operator()(const Base&) const {
+    int operator()(const Base &) const
+    {
         cout << __func__ << endl;
         return 4;
     }
 };
 
-class GameLevel {
+class GameLevel
+{
 public:
     explicit GameLevel(int l) : m_level(l) {}
-    ~GameLevel(){}
-    float health(const Base&) const {
+    ~GameLevel() {}
+    float health(const Base &) const
+    {
         cout << __func__ << endl;
         return m_level;
     }
+
 private:
     int m_level;
 };
@@ -138,9 +150,10 @@ class HealthCalc
 {
 public:
     HealthCalc() {}
-    ~HealthCalc(){}
+    ~HealthCalc() {}
 
-    virtual int calc(const Character&) const {
+    virtual int calc(const Character &) const
+    {
         cout << __func__ << endl;
         return 5;
     }
@@ -149,9 +162,10 @@ public:
 class DefaultCalc : public HealthCalc
 {
 public:
-    DefaultCalc():HealthCalc() {}
-    ~DefaultCalc(){}
-    virtual int calc(const Character&) const {
+    DefaultCalc() : HealthCalc() {}
+    ~DefaultCalc() {}
+    virtual int calc(const Character &) const
+    {
         cout << __func__ << endl;
         return 6;
     }
@@ -161,32 +175,33 @@ DefaultCalc defaultCalc;
 class Character
 {
 public:
-    explicit Character(HealthCalc *pf = &defaultCalc):pCalc(pf) {}
-    ~Character(){}
+    explicit Character(HealthCalc *pf = &defaultCalc) : pCalc(pf) {}
+    ~Character() {}
 
-    virtual int healthValue() const {
+    virtual int healthValue() const
+    {
         return pCalc->calc(*this);
     }
+
 private:
-    HealthCalc* pCalc;
+    HealthCalc *pCalc;
 };
 
-int main(void)
+int
+main(void)
 {
     GameCharacter *g = new GamePeople(1);
     // GameCharacter *g = new GameCharacter(1);
     g->healthValue();
 
-    Derived d1(loseHealthQuickly);
-    Derived d2(loseHealthSlowly);
-    Derived d3;
-    Derived d4(calcHealth);
+    Derived          d1(loseHealthQuickly);
+    Derived          d2(loseHealthSlowly);
+    Derived          d3;
+    Derived          d4(calcHealth);
     HealthCalculator c;
-    Derived d5(c);
-    GameLevel currentLevel(11);
-    Derived d6(std::bind(&GameLevel::health,
-                         currentLevel,
-                         std::placeholders::_1));
+    Derived          d5(c);
+    GameLevel        currentLevel(11);
+    Derived          d6(std::bind(&GameLevel::health, currentLevel, std::placeholders::_1));
 
     cout << d1.healthValue() << endl;
     cout << d2.healthValue() << endl;
