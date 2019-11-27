@@ -32,7 +32,7 @@ main(void)
         std::cout << "push " << i << std::endl;
         rb.push(i);
     }
-    rb.push(-1);
+    // rb.push(-1);
     for (size_t i = 0; i < rb.size(); i++) {
         std::cout << rb.pop() << std::endl;
     }
