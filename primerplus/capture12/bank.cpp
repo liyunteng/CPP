@@ -67,7 +67,7 @@ main(void)
     long customers = 0;
     long served    = 0;
     long sum_line  = 0;
-    int  wait_time = 0;
+    int wait_time  = 0;
     long line_wait = 0;
 
     for (int cycle = 0; cycle < cyclelimit; cycle++) {
@@ -100,7 +100,8 @@ main(void)
         cout.precision(2);
         cout.setf(ios_base::fixed, ios_base::floatfield);
         cout << (double)sum_line / cyclelimit << endl;
-        cout << " average wait time: " << (double)line_wait / served << " minutes\n";
+        cout << " average wait time: " << (double)line_wait / served
+             << " minutes\n";
     } else
         cout << "No customers!\n";
 

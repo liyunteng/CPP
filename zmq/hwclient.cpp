@@ -29,7 +29,7 @@ int
 main(int argc, char *argv[])
 {
     zmq::context_t context(1);
-    zmq::socket_t  socket(context, ZMQ_REQ);
+    zmq::socket_t socket(context, ZMQ_REQ);
 
     std::cout << "Connecting to hello world server..." << std::endl;
     socket.connect("tcp://localhost:5555");
@@ -42,7 +42,8 @@ main(int argc, char *argv[])
 
         zmq::message_t reply;
         socket.recv(&reply);
-        std::cout << "Received " << reply.data() << " " << request_nbr << std::endl;
+        std::cout << "Received " << reply.data() << " " << request_nbr
+                  << std::endl;
     }
     return 0;
 }

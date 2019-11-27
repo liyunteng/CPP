@@ -25,7 +25,7 @@
 #include <iostream>
 
 // #define Max(a, b) ((a) > (b) ? (a) : (b))
-template <typename T>
+template<typename T>
 inline T
 Max(const T &a, const T &b)
 {

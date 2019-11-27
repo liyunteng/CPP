@@ -69,7 +69,7 @@ Time
 Time::operator-(const Time &t) const const
 {
     Time diff;
-    int  tot1, tot2;
+    int tot1, tot2;
     tot1           = t.m_minutes + 60 * t.m_hours;
     tot2           = m_minutes + 60 * m_hours;
     diff.m_minutes = (tot2 - tot1) % 60;

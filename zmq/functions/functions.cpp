@@ -26,10 +26,10 @@
 
 #define ENDPOINT "tcp://localhost:1234"
 
-#define CHECK()                               \
-    if (!inited) {                            \
-        iHiLog::error("Functions not init."); \
-        return ERR_NOT_INIT;                  \
+#define CHECK()                                                                \
+    if (!inited) {                                                             \
+        iHiLog::error("Functions not init.");                                  \
+        return ERR_NOT_INIT;                                                   \
     }
 
 int
@@ -90,7 +90,8 @@ Functions::avSetEncBitsRate(const char *bits)
         iHiLog::error("zmq_send failed: %s.", zmq_strerror(errno));
         return errno;
     } else {
-        iHiLog::debug("zmq send: avSetEncBitsRate, size: %lu", sizeof(bitsrate));
+        iHiLog::debug("zmq send: avSetEncBitsRate, size: %lu",
+                      sizeof(bitsrate));
     }
 
     return getReturn();
@@ -102,7 +103,8 @@ Functions::avSetEncSolution(const char *width, const char *height)
     CHECK();
 
     int ret;
-    if (strlen(width) >= VIDEO_ENC_PARAM_LEN || strlen(height) >= VIDEO_ENC_PARAM_LEN) {
+    if (strlen(width) >= VIDEO_ENC_PARAM_LEN
+        || strlen(height) >= VIDEO_ENC_PARAM_LEN) {
         iHiLog::error("avSetEncSolution args invalid.");
         return ERR_ARG_INVALID;
     }
@@ -116,7 +118,8 @@ Functions::avSetEncSolution(const char *width, const char *height)
         iHiLog::error("zmq_send failed: %s.", zmq_strerror(errno));
         return errno;
     } else {
-        iHiLog::debug("zmq send: avSetEncSolution, size: %lu", sizeof(solution));
+        iHiLog::debug("zmq send: avSetEncSolution, size: %lu",
+                      sizeof(solution));
     }
 
     return getReturn();
@@ -127,7 +130,7 @@ Functions::avSetLayout(picture pic[4])
 {
     CHECK();
 
-    int              ret;
+    int ret;
     ParamSetAVLayout layout;
     layout.h.cmd = CMD_AVSETLAYOUT;
     memcpy(layout.pictures, pic, sizeof(layout.pictures));
@@ -180,7 +183,7 @@ Functions::avStart()
 {
     CHECK()
 
-    int          ret;
+    int ret;
     ParamAVStart av_start = {CMD_AVSTART};
     ret                   = zmq_send(request, &av_start, sizeof(av_start), 0);
     if (ret == -1) {

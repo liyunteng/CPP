@@ -24,15 +24,13 @@
 class Rational
 {
 public:
-    Rational(int numerator = 0, int denominator = 1) : num(numerator), den(denominator) {}
-    int numberator() const
+    Rational(int numerator = 0, int denominator = 1) :
+        num(numerator),
+        den(denominator)
     {
-        return num;
     }
-    int denominator() const
-    {
-        return den;
-    }
+    int numberator() const { return num; }
+    int denominator() const { return den; }
     virtual ~Rational() {}
 
 private:
@@ -42,7 +40,8 @@ private:
 
 const Rational operator*(const Rational &lhs, const Rational &rhs)
 {
-    return Rational(lhs.numberator() * rhs.numberator(), lhs.denominator() * rhs.denominator());
+    return Rational(lhs.numberator() * rhs.numberator(),
+                    lhs.denominator() * rhs.denominator());
 }
 
 int

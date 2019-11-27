@@ -29,10 +29,7 @@ class Investment
 public:
     Investment() {}
     virtual ~Investment() {}
-    bool isTaxFree() const
-    {
-        return true;
-    }
+    bool isTaxFree() const { return true; }
 };
 
 Investment *
@@ -46,19 +43,10 @@ class FontHandle
 public:
     FontHandle() : size(0) {}
     virtual ~FontHandle() {}
-    void setSize(int s)
-    {
-        size = s;
-    }
-    int getSize()
-    {
-        return size;
-    }
+    void setSize(int s) { size = s; }
+    int getSize() { return size; }
 
-    void release()
-    {
-        std::cout << "released" << std::endl;
-    }
+    void release() { std::cout << "released" << std::endl; }
 
 private:
     int size;
@@ -80,18 +68,10 @@ class Font
 {
 public:
     explicit Font(FontHandle &fh) : f(fh) {}
-    virtual ~Font()
-    {
-        releaseFont(f);
-    }
-    FontHandle &get()
-    {
-        return f;
-    }
-    operator FontHandle &() const
-    {
-        return f;
-    }
+    virtual ~Font() { releaseFont(f); }
+    FontHandle &get() { return f; }
+    operator FontHandle &() const { return f; }
+
 private:
     FontHandle &f;
 };
@@ -100,17 +80,17 @@ int
 main(void)
 {
     std::tr1::shared_ptr<Investment> pi1(createInvestment());
-    bool                             taxable = !(pi1->isTaxFree());
+    bool taxable = !(pi1->isTaxFree());
 
     std::cout.setf(std::ios::boolalpha);
     std::cout << taxable << std::endl;
 
     std::auto_ptr<Investment> pi2(createInvestment());
-    bool                      taxable2 = !((*pi2).isTaxFree());
+    bool taxable2 = !((*pi2).isTaxFree());
     std::cout << taxable2 << std::endl;
 
     FontHandle fh;
-    Font       f(fh);
+    Font f(fh);
     std::cout << f.get().getSize() << std::endl;
 
     setSize(f, 100);

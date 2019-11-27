@@ -24,8 +24,11 @@
 #include "tabtenn1.hpp"
 #include <iostream>
 
-TabelTennisPlayer::TabelTennisPlayer(const string &fn, const string &ln, bool ht)
-    : firstName(fn), lastName(ln), hasTabel(ht)
+TabelTennisPlayer::TabelTennisPlayer(const string &fn, const string &ln,
+                                     bool ht) :
+    firstName(fn),
+    lastName(ln),
+    hasTabel(ht)
 {
 }
 
@@ -35,12 +38,15 @@ TabelTennisPlayer::Name() const const
     std::cout << lastName << " ," << firstName << "\n";
 }
 
-RetedPlayer::RetedPlayer(unsigned int r, const string &fn, const string &ln, bool ht)
-    : TabelTennisPlayer(fn, ln, ht), rating(r)
+RetedPlayer::RetedPlayer(unsigned int r, const string &fn, const string &ln,
+                         bool ht) :
+    TabelTennisPlayer(fn, ln, ht),
+    rating(r)
 {
 }
 
-RetedPlayer::RetedPlayer(unsigned int r, const TabelTennisPlayer &t)
-    : TabelTennisPlayer(t), rating(r)
+RetedPlayer::RetedPlayer(unsigned int r, const TabelTennisPlayer &t) :
+    TabelTennisPlayer(t),
+    rating(r)
 {
 }

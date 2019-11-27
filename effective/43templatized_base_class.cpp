@@ -24,14 +24,8 @@ using namespace std;
 class CompanyA
 {
 public:
-    void sendCleartext(const string &msg)
-    {
-        cout << __func__ << msg << endl;
-    }
-    void sendEncrypted(const string &msg)
-    {
-        cout << __func__ << msg << endl;
-    }
+    void sendCleartext(const string &msg) { cout << __func__ << msg << endl; }
+    void sendEncrypted(const string &msg) { cout << __func__ << msg << endl; }
 };
 
 class CompanyB
@@ -55,7 +49,7 @@ public:
     }
 };
 
-template <typename Company>
+template<typename Company>
 class MsgSender
 {
 public:
@@ -71,7 +65,7 @@ public:
     }
 };
 // 特化
-template <>
+template<>
 class MsgSender<CompanyZ>
 {
 public:
@@ -82,7 +76,7 @@ public:
     }
 };
 
-template <typename Company>
+template<typename Company>
 class LogingMsgSender : public MsgSender<Company>
 {
 public:
@@ -102,7 +96,7 @@ public:
     }
 };
 
-template <>
+template<>
 class LogingMsgSender<CompanyZ> : public MsgSender<CompanyZ>
 {
 public:

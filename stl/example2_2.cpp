@@ -31,7 +31,7 @@ int
 main(int argc, char *argv[])
 {
     vector<int> num; /* STL中的vector容器 */
-    int         element;
+    int element;
 
     /* 从标准输入设备读入整数 */
     /* 知道输入的是非整形数据为止 */

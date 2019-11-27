@@ -27,7 +27,7 @@ main(int argc, char *argv[])
 {
     using namespace std;
 
-    double         a1[4] = {1.2, 2.4, 3.6, 4.8};
+    double a1[4] = {1.2, 2.4, 3.6, 4.8};
     vector<double> a2(4);
     a2[0] = 1.0 / 3.0;
     a2[1] = 1.0 / 5.0;

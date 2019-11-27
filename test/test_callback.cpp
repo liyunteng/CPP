@@ -14,14 +14,8 @@ public:
             std::cout << "callback test" << std::endl;
     }
 
-    callback getEntry()
-    {
-        return (callback)thunk;
-    }
-    int get_ab()
-    {
-        return lyt;
-    }
+    callback getEntry() { return (callback)thunk; }
+    int get_ab() { return lyt; }
     static int is;
 
 private:

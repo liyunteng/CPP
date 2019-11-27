@@ -35,7 +35,7 @@ int
 main(void)
 {
     std::string in;
-    cmatch      what;
+    cmatch what;
 
     cout << "Enter testing string: " << endl;
     getline(cin, in);

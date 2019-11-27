@@ -32,7 +32,7 @@ int
 main(int argc, char *argv[])
 {
     zmq::context_t context(1);
-    zmq::socket_t  publisher(context, ZMQ_PUB);
+    zmq::socket_t publisher(context, ZMQ_PUB);
     publisher.bind("tcp://*:5556");
     publisher.bind("ipc://weather.ipc");
 
@@ -45,7 +45,8 @@ main(int argc, char *argv[])
         relhumidity = within(50) + 10;
 
         zmq::message_t message(20);
-        snprintf((char *)message.data(), 20, "%05d %d %d", zipcode, temperature, relhumidity);
+        snprintf((char *)message.data(), 20, "%05d %d %d", zipcode, temperature,
+                 relhumidity);
         publisher.send(message);
     }
     return 0;

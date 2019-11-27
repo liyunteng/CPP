@@ -25,10 +25,7 @@ class Base
 public:
     Base() {}
     ~Base() {}
-    void show()
-    {
-        cout << __func__ << endl;
-    }
+    void show() { cout << __func__ << endl; }
 
 private:
 };
@@ -38,10 +35,7 @@ class Derived : private Base
 public:
     Derived() {}
     ~Derived() {}
-    void a()
-    {
-        this->show();
-    }
+    void a() { this->show(); }
 };
 
 class Timer

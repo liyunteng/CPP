@@ -38,7 +38,8 @@ public:
     // char &operator[](std::size_t position) {return text[position];}
     char &operator[](std::size_t position)
     {
-        return const_cast<char &>(static_cast<const TextBlock>(*this)[position]);
+        return const_cast<char &>(
+            static_cast<const TextBlock>(*this)[position]);
     }
 
     std::string Text(std::string ns) const
@@ -46,6 +47,7 @@ public:
         text = ns;  // have const, but change text!!
         return text;
     }
+
 private:
     mutable std::string text;  // mutable for Text(string)
 };
@@ -59,11 +61,11 @@ print(const TextBlock &ctb)
 int
 main(void)
 {
-    char              greeting[] = "Hello";
-    char *            p1         = greeting;  // non-const pointer, non-const data
-    const char *      p2         = greeting;  // non-const pointer, const data
-    char *const       p3         = greeting;  // const pointer, non-const data
-    const char *const p4         = greeting;  // const pointer, const data
+    char greeting[]      = "Hello";
+    char *p1             = greeting;  // non-const pointer, non-const data
+    const char *p2       = greeting;  // non-const pointer, const data
+    char *const p3       = greeting;  // const pointer, non-const data
+    const char *const p4 = greeting;  // const pointer, const data
 
     char newstr[] = "World";
 

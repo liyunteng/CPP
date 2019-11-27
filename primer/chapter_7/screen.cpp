@@ -62,7 +62,7 @@ Window_mgr::addScreen(const Screen &s)
 int
 main(void)
 {
-    Screen       s(5, 3);
+    Screen s(5, 3);
     const Screen blank(5, 3);
     s.move(0, 0).set('#');
     s.move(4, 2).set('*');

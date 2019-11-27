@@ -28,26 +28,21 @@ using namespace std;
 class A
 {
 public:
-    int  i = 1;
+    int i = 1;
     void print_i()
     {
         cout << "a i: " << i << endl;
         print_j();
         print_k();
     }
+
 protected:
-    int  j = 2;
-    void print_j()
-    {
-        cout << "a j: " << j << endl;
-    }
+    int j = 2;
+    void print_j() { cout << "a j: " << j << endl; }
 
 private:
-    int  k = 3;
-    void print_k()
-    {
-        cout << "a k: " << k << endl;
-    }
+    int k = 3;
+    void print_k() { cout << "a k: " << k << endl; }
 };
 
 class B : public A

@@ -1,5 +1,5 @@
-// -*- compile-command: "clang++ -Wall -o 35non-virtual 35non-virtual.cpp -g -std=c++11" -*-
-// 35non-virtual.cpp --
+// -*- compile-command: "clang++ -Wall -o 35non-virtual 35non-virtual.cpp -g
+// -std=c++11" -*- 35non-virtual.cpp --
 
 // Copyright (C) 2017 liyunteng
 // Auther: liyunteng <li_yunteng@163.com>
@@ -84,10 +84,7 @@ public:
     explicit Base(HealthCalcFunc hcf = defaultHealthCalc) : healthFunc(hcf) {}
     ~Base() {}
 
-    int healthValue() const
-    {
-        return healthFunc(*this);
-    }
+    int healthValue() const { return healthFunc(*this); }
 
 private:
     HealthCalcFunc healthFunc;
@@ -178,10 +175,7 @@ public:
     explicit Character(HealthCalc *pf = &defaultCalc) : pCalc(pf) {}
     ~Character() {}
 
-    virtual int healthValue() const
-    {
-        return pCalc->calc(*this);
-    }
+    virtual int healthValue() const { return pCalc->calc(*this); }
 
 private:
     HealthCalc *pCalc;
@@ -194,14 +188,15 @@ main(void)
     // GameCharacter *g = new GameCharacter(1);
     g->healthValue();
 
-    Derived          d1(loseHealthQuickly);
-    Derived          d2(loseHealthSlowly);
-    Derived          d3;
-    Derived          d4(calcHealth);
+    Derived d1(loseHealthQuickly);
+    Derived d2(loseHealthSlowly);
+    Derived d3;
+    Derived d4(calcHealth);
     HealthCalculator c;
-    Derived          d5(c);
-    GameLevel        currentLevel(11);
-    Derived          d6(std::bind(&GameLevel::health, currentLevel, std::placeholders::_1));
+    Derived d5(c);
+    GameLevel currentLevel(11);
+    Derived d6(
+        std::bind(&GameLevel::health, currentLevel, std::placeholders::_1));
 
     cout << d1.healthValue() << endl;
     cout << d2.healthValue() << endl;

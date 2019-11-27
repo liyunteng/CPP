@@ -1,5 +1,5 @@
-// -*- compile-command: "clang++ -Wall -o 10operator 10operator.cpp -g -std=c++11" -*-
-// 10operator.cpp --
+// -*- compile-command: "clang++ -Wall -o 10operator 10operator.cpp -g
+// -std=c++11" -*- 10operator.cpp --
 
 // Copyright (C) 2016 liyunteng
 // Auther: liyunteng <li_yunteng@163.com>
@@ -33,10 +33,7 @@ public:
 
     Widget(const Widget &rhs) : m_data(rhs.m_data) {}
     Widget(const Widget &&rhs) : m_data(rhs.m_data) {}
-    void swap(Widget &rhs)
-    {
-        std::cout << "refer" << std::endl;
-    }
+    void swap(Widget &rhs) { std::cout << "refer" << std::endl; }
     Widget &operator=(const Widget &rhs)
     {
         std::cout << "aaa" << std::endl;
@@ -63,18 +60,9 @@ operator<<(ostream &os, const Widget &w)
 }
 
 struct Person {
-    Person(const char *p)
-    {
-        cout << "constructor" << endl;
-    }
-    Person(const Person &p)
-    {
-        cout << "copy constructror" << endl;
-    }
-    Person(Person &&p)
-    {
-        cout << "move copy constructor" << endl;
-    }
+    Person(const char *p) { cout << "constructor" << endl; }
+    Person(const Person &p) { cout << "copy constructror" << endl; }
+    Person(Person &&p) { cout << "move copy constructor" << endl; }
     const Person &operator=(const Person &p)
     {
         cout << "operator=" << endl;
@@ -85,10 +73,7 @@ struct Person {
         cout << "move operator=" << endl;
         return *this;
     }
-    ~Person()
-    {
-        cout << "destructor" << endl;
-    }
+    ~Person() { cout << "destructor" << endl; }
 };
 Person
 getAlice()

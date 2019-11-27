@@ -33,7 +33,7 @@ int
 main(int argc, char *argv[])
 {
     zmq::context_t context(1);
-    zmq::socket_t  sender(context, ZMQ_PUSH);
+    zmq::socket_t sender(context, ZMQ_PUSH);
     sender.bind("tcp://*:5557");
 
     std::cout << "Press Enter when the woekers are ready: " << std::endl;

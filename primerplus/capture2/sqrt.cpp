@@ -36,7 +36,8 @@ main(int argc, char *argv[])
     double side;
     side = sqrt(area);
 
-    cout << "That's the equivalent of a square " << side << " feet to the side." << endl;
+    cout << "That's the equivalent of a square " << side << " feet to the side."
+         << endl;
     cout << "How fascinating!" << endl;
     return 0;
 }

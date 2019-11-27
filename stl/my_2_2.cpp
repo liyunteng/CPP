@@ -30,7 +30,7 @@ int
 main(int argc, char *argv[])
 {
     vector<int> num;
-    int         n;
+    int n;
 
     while (cin >> n)
         num.push_back(n);

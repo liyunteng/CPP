@@ -28,10 +28,8 @@ class Year
 public:
     explicit Year(int y) : year(y) {}
     virtual ~Year() {}
-    int get() const
-    {
-        return year;
-    }
+    int get() const { return year; }
+
 private:
     int year;
 };
@@ -55,10 +53,8 @@ public:
     };
     explicit Month(MOUNTHS m) : month(m) {}
     virtual ~Month() {}
-    int get() const
-    {
-        return month;
-    }
+    int get() const { return month; }
+
 private:
     int month;
 };
@@ -69,10 +65,8 @@ public:
     explicit Day(int d) : day(d) {}
     virtual ~Day() {}
 
-    int get() const
-    {
-        return day;
-    }
+    int get() const { return day; }
+
 private:
     int day;
 };
@@ -80,18 +74,24 @@ private:
 class Date
 {
 public:
-    Date(const Month &m, const Day &d, const Year &y) : month(m), day(d), year(y) {}
+    Date(const Month &m, const Day &d, const Year &y) :
+        month(m),
+        day(d),
+        year(y)
+    {
+    }
     virtual ~Date() {}
 
     void show()
     {
-        std::cout << year.get() << "/" << month.get() << "/" << day.get() << std::endl;
+        std::cout << year.get() << "/" << month.get() << "/" << day.get()
+                  << std::endl;
     }
 
 private:
     const Month &month;
-    const Day &  day;
-    const Year & year;
+    const Day &day;
+    const Year &year;
 };
 
 int

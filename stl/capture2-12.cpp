@@ -28,9 +28,9 @@
 int
 main(void)
 {
-    int   i = 30;
+    int i   = 30;
     float f = 12.34;
-    char  c;
+    char c;
 
     std::fstream fl("sf", std::ios::out | std::ios::in);
     if (!fl) {

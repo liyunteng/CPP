@@ -49,14 +49,15 @@ parser::is_sub(const string &input)
 }
 
 bool
-parser::find_pair(const string &input, string::size_type start, string::size_type &end)
+parser::find_pair(const string &input, string::size_type start,
+                  string::size_type &end)
 {
     if (input.empty()) {
         return false;
     }
-    string::size_type        idx = start, len = input.length();
+    string::size_type idx = start, len = input.length();
     stack<string::size_type> idx_stack;
-    int                      level = 0;
+    int level = 0;
     for (; idx < len; idx++) {
         switch (input[idx]) {
         case prefix:
@@ -87,7 +88,8 @@ parser::find_pair(const string &input, string::size_type start, string::size_typ
 // find sin/cos
 bool
 parser::find_cs(const string &in, string::size_type idx, string::size_type &end,
-                stack<string> &operator_stack, stack<string> &operand_stack, bool &valid)
+                stack<string> &operator_stack, stack<string> &operand_stack,
+                bool &valid)
 {
     if (in.length() <= 0) {
         return false;
@@ -135,7 +137,7 @@ parser::eval_cs(const string &input)
         idx = s.find(prefix);
         if (idx != s.npos && find_pair(s, idx, end)) {
             string tmp = string(s, idx + 1, end - idx - 1);
-            float  val = atof(tmp.c_str());
+            float val  = atof(tmp.c_str());
             if (s.find("sin") == 0) {
                 return sin(val);
             } else {
@@ -151,7 +153,7 @@ parser::eval(stack<string> &operand_stack, stack<string> &operator_stack)
 {
     string op;
     string s;
-    float  val = 0.0, val0, val1;
+    float val = 0.0, val0, val1;
 
     if (debug) {
         stack<string> operand_tmp(operand_stack);
@@ -256,7 +258,7 @@ parser::parse_sub(const string &input, bool &valid)
 {
     string in = input;
     trim(in);
-    string::size_type       idx = 0, end = 0;
+    string::size_type idx = 0, end = 0;
     std::stack<std::string> operator_stack;
     std::stack<std::string> operand_stack;
     valid = true;
@@ -279,7 +281,8 @@ parser::parse_sub(const string &input, bool &valid)
             if (!valid) {
                 return 0.0;
             }
-        } else if (find_cs(in, idx, end, operator_stack, operand_stack, valid)) {
+        } else if (find_cs(in, idx, end, operator_stack, operand_stack,
+                           valid)) {
             if (!valid) {
                 return 0.0;
             }
@@ -325,7 +328,8 @@ parser::parse_sub(const string &input, bool &valid)
                 return 0.0;
             }
 
-        } else if (find_cs(in, idx, end, operator_stack, operand_stack, valid)) {
+        } else if (find_cs(in, idx, end, operator_stack, operand_stack,
+                           valid)) {
             if (!valid) {
                 return 0.0;
             }
@@ -382,7 +386,7 @@ parser::parse(const string &input)
         return 0.0;
     }
 
-    bool  valid;
+    bool valid;
     float a = parse_sub(input, valid);
     if (!valid) {
         cout << "!!INVALID!! ";

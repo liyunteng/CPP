@@ -1,4 +1,5 @@
-// -*- compile-command: "clang++ -Wall -o 14copy_in_raii 14copy_in_raii.cpp -g -std=c++11 -lpthread"
+// -*- compile-command: "clang++ -Wall -o 14copy_in_raii 14copy_in_raii.cpp -g
+// -std=c++11 -lpthread"
 // -*- 14copy_in_raii.cpp --
 
 // Copyright (C) 2017 liyunteng
@@ -47,12 +48,12 @@ public:
 
 private:
     Lock(const Lock &rhs);
-    Lock &                      operator=(const Lock &rhs);
+    Lock &operator=(const Lock &rhs);
     shared_ptr<pthread_mutex_t> mutexPtr;
 };
 
-static int             count = 0;
-static pthread_mutex_t sm    = PTHREAD_MUTEX_INITIALIZER;
+static int count          = 0;
+static pthread_mutex_t sm = PTHREAD_MUTEX_INITIALIZER;
 void *
 thread_run(void *arg)
 {
@@ -73,7 +74,7 @@ main(void)
 {
     // cout << "sm: " << &sm << endl;
     pthread_t pid1, pid2;
-    int       arg1, arg2;
+    int arg1, arg2;
     arg1 = 1;
     arg2 = 2;
     pthread_setconcurrency(2);

@@ -81,12 +81,13 @@ public:
 
     void show()
     {
-        cout << __func__ << " show:" << m_data << " ptr size: " << sizeof(m_ptr) << endl;
+        cout << __func__ << " show:" << m_data << " ptr size: " << sizeof(m_ptr)
+             << endl;
     }
 
 private:
     size_t m_data;
-    char * m_ptr;
+    char *m_ptr;
 };
 
 void

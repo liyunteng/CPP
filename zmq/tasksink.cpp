@@ -30,7 +30,7 @@ int
 main(int argc, char *argv[])
 {
     zmq::context_t context(1);
-    zmq::socket_t  receiver(context, ZMQ_PULL);
+    zmq::socket_t receiver(context, ZMQ_PULL);
     receiver.bind("tcp://*:5558");
 
     zmq::message_t message;
@@ -61,7 +61,8 @@ main(int argc, char *argv[])
     }
 
     total_msec = tdiff.tv_sec * 1000 + tdiff.tv_usec / 1000;
-    std::cout << "\nTotal elapsed time: " << total_msec << " msec\n" << std::endl;
+    std::cout << "\nTotal elapsed time: " << total_msec << " msec\n"
+              << std::endl;
 
     return 0;
 }

@@ -21,27 +21,27 @@
 #include <algorithm>
 #include <list>
 
-template <typename T>
+template<typename T>
 class Set
 {
 public:
-    bool        member(const T &item) const;
-    void        insert(const T &item);
-    void        remove(const T &item);
+    bool member(const T &item) const;
+    void insert(const T &item);
+    void remove(const T &item);
     std::size_t size() const;
 
 private:
     std::list<T> rep;
 };
 
-template <typename T>
+template<typename T>
 bool
 Set<T>::member(const T &item) const
 {
     return std::find(rep.begin(), rep.end(), item) != rep.end();
 }
 
-template <typename T>
+template<typename T>
 void
 Set<T>::insert(const T &item)
 {
@@ -49,16 +49,17 @@ Set<T>::insert(const T &item)
         rep.push_back(item);
 }
 
-template <typename T>
+template<typename T>
 void
 Set<T>::remove(const T &item)
 {
-    typename std::list<T>::iterator it = std::find(rep.begin(), rep.end(), item);
+    typename std::list<T>::iterator it =
+        std::find(rep.begin(), rep.end(), item);
     if (it != rep.end())
         rep.erase(it);
 }
 
-template <typename T>
+template<typename T>
 std::size_t
 Set<T>::size() const
 {

@@ -5,7 +5,7 @@
 #include "matrix.hpp"
 #include <iostream>
 using namespace std;
-template <class T>
+template<class T>
 void
 test_multi(const T &a, const T &b)
 {
@@ -13,7 +13,7 @@ test_multi(const T &a, const T &b)
     cout << a << "*" << b << "=" << r << endl;
 }
 
-template <class T>
+template<class T>
 void
 test_add(const T &a, const T &b)
 {

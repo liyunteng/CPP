@@ -11,10 +11,7 @@
 class Test
 {
 public:
-    Test()
-    {
-        std::cout << __PRETTY_FUNCTION__ << std::endl;
-    }
+    Test() { std::cout << __PRETTY_FUNCTION__ << std::endl; }
     // const
     Test(const std::string &v) : m_val(v)
     {
@@ -47,10 +44,7 @@ public:
         return *this;
     }
 
-    ~Test()
-    {
-        std::cout << __PRETTY_FUNCTION__ << std::endl;
-    }
+    ~Test() { std::cout << __PRETTY_FUNCTION__ << std::endl; }
 
 private:
     std::string m_val;
@@ -80,13 +74,13 @@ testx(const Test &a)
 int
 main(void)
 {
-    Test        a;
-    Test        b("abc");
+    Test a;
+    Test b("abc");
     std::string s = "xxx";
-    Test        c(s);
-    Test        d(c);
-    const Test  e(d);
-    Test        f(e);
+    Test c(s);
+    Test d(c);
+    const Test e(d);
+    Test f(e);
 
     std::cout << "===========" << std::endl;
 

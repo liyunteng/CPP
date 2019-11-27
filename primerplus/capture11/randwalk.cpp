@@ -33,12 +33,12 @@ main(void)
     using VECTOR::Vector;
 
     srand(time(0));
-    double        direction;
-    Vector        step;
-    Vector        result(0.0, 0.0);
+    double direction;
+    Vector step;
+    Vector result(0.0, 0.0);
     unsigned long steps = 0;
-    double        target;
-    double        dstep;
+    double target;
+    double dstep;
 
     std::cout << "Enter target distance (q to quit): ";
     while (cin >> target) {
@@ -59,7 +59,8 @@ main(void)
 
         result.polarMode();
         cout << " or\n" << result << endl;
-        cout << "Average outward distance per step = " << result.magVal() / steps << endl;
+        cout << "Average outward distance per step = "
+             << result.magVal() / steps << endl;
         steps = 0;
         result.reset(0.0, 0.0);
         cout << "Enter target distance (q to quit): ";

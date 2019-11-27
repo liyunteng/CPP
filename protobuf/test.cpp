@@ -90,7 +90,8 @@ ListPeople(const test::AddressBook &ab)
             cout << pn.number() << endl;
         }
         if (person.has_last_updated()) {
-            cout << "  Updated: " << TimeUtil::ToString(person.last_updated()) << endl;
+            cout << "  Updated: " << TimeUtil::ToString(person.last_updated())
+                 << endl;
         }
     }
 }

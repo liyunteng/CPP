@@ -37,18 +37,18 @@ public:
     virtual ~ABEntry() {}
 
 private:
-    std::string            theName;
-    std::string            theAddress;
+    std::string theName;
+    std::string theAddress;
     std::list<std::string> thePhones;
-    int                    numTimesConsulted;
+    int numTimesConsulted;
 };
 
 ABEntry::ABEntry(const std::string &name, const std::string &address,
-                 const std::list<std::string> &phones)
-    : theName(name),  // initialize
-      theAddress(address),
-      thePhones(phones),
-      numTimesConsulted(0)
+                 const std::list<std::string> &phones) :
+    theName(name),  // initialize
+    theAddress(address),
+    thePhones(phones),
+    numTimesConsulted(0)
 {
     // theName = name;             // use assignments not initailize
     // theAddress = address;

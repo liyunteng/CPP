@@ -13,7 +13,7 @@ const int g = 3;
 void
 test1()
 {
-    int  i = 0;
+    int i  = 0;
     int *p = &i;
     *p     = g;
     // p = &g; error!!!

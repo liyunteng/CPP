@@ -73,9 +73,9 @@ private:
     int priority;
 };
 
-PriorityCustomer::PriorityCustomer(const PriorityCustomer &rhs)
-    : Customer(rhs),  // 一定要显示初始化base
-      priority(rhs.priority)
+PriorityCustomer::PriorityCustomer(const PriorityCustomer &rhs) :
+    Customer(rhs),  // 一定要显示初始化base
+    priority(rhs.priority)
 {
     logCall("PriorityCustomer copy constructor");
 }
@@ -93,7 +93,7 @@ PriorityCustomer::operator=(const PriorityCustomer &rhs)
 int
 main(void)
 {
-    Customer         c1("c1");
+    Customer c1("c1");
     PriorityCustomer p1("ddd", 1);
     p1 = PriorityCustomer("abc", 2);
     return 0;

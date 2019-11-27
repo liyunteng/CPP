@@ -37,10 +37,11 @@ main(void)
     cout << "Hi, what's your name?\n>> ";
     cin >> name;
 
-    cout << name << ", please enter up to " << ArSize << " short sayings <empty line to quit>:\n";
+    cout << name << ", please enter up to " << ArSize
+         << " short sayings <empty line to quit>:\n";
     String sayings[ArSize];
-    char   temp[MaxLen];
-    int    i;
+    char temp[MaxLen];
+    int i;
     for (i = 0; i < ArSize; i++) {
 
         cout << i + 1 << ": ";
@@ -71,7 +72,8 @@ main(void)
 
         cout << "Shortest saying:\n" << sayings[shortest] << endl;
         cout << "First alphabetically:\n" << sayings[first] << endl;
-        cout << "This program used " << String::HowMany() << " String objects. Bye.\n";
+        cout << "This program used " << String::HowMany()
+             << " String objects. Bye.\n";
     } else
         cout << "No input! Bye.\n";
 

@@ -7,7 +7,7 @@
  * All rights reserved.
  *------------------------------------------------------------------
  */
- 
+
 #ifndef __SO_LOG_H__
 #define __SO_LOG_H__
 
@@ -16,20 +16,20 @@
 class iHiLog
 {
 public:
-	static void init();
-	static void uninit();
-	
-	static void debug(const char * format, ...);
-	static void info(const char * format, ...);
-	static void warn(const char * format, ...);
-	static void error(const char * format, ...);
-	static void fatal(const char * format, ...);	
+    static void init();
+    static void uninit();
 
-	static void write(const char * buffer);
+    static void debug(const char *format, ...);
+    static void info(const char *format, ...);
+    static void warn(const char *format, ...);
+    static void error(const char *format, ...);
+    static void fatal(const char *format, ...);
 
-	static bool bLogFile;
-	static int nLogLevel;
-	static pthread_mutex_t 	sMutex;
+    static void write(const char *buffer);
+
+    static bool bLogFile;
+    static int nLogLevel;
+    static pthread_mutex_t sMutex;
 };
 
-#endif // __SO_LOG_H__
+#endif  // __SO_LOG_H__

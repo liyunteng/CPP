@@ -38,13 +38,23 @@ class Empty
 //     Empty &operator=(const Empty& rhs){...} // copy assignment
 // };
 
-template <typename T>
+template<typename T>
 class NamedObject
 {
 public:
-    NamedObject(const char *name, const T &value) : nameValue(name), objectValue(value) {}
-    NamedObject(const std::string &name, const T &value) : nameValue(name), objectValue(value) {}
-    NamedObject(NamedObject<T> &rhs) : nameValue(rhs.nameValue), objectValue(rhs.objectValue)
+    NamedObject(const char *name, const T &value) :
+        nameValue(name),
+        objectValue(value)
+    {
+    }
+    NamedObject(const std::string &name, const T &value) :
+        nameValue(name),
+        objectValue(value)
+    {
+    }
+    NamedObject(NamedObject<T> &rhs) :
+        nameValue(rhs.nameValue),
+        objectValue(rhs.objectValue)
     {
         std::cout << "in copy ct" << std::endl;
     }
@@ -52,28 +62,29 @@ public:
 
 private:
     std::string nameValue;
-    T           objectValue;
+    T objectValue;
 };
 
-template <typename T>
+template<typename T>
 class NamedObjectR;
-template <typename T>
+template<typename T>
 std::ostream &operator<<(std::ostream &os, const NamedObjectR<T> &rhs);
-template <typename D>
+template<typename D>
 std::ostream &myShow(std::ostream &os, const D &d);
 
-template <typename T>
+template<typename T>
 class NamedObjectR
 {
 public:
     // cant' use const std:string &name
-    NamedObjectR(std::string &name, const T &value) : nameValue(name), objectValue(value) {}
+    NamedObjectR(std::string &name, const T &value) :
+        nameValue(name),
+        objectValue(value)
+    {
+    }
     ~NamedObjectR() {}
 
-    std::string &name() const
-    {
-        return nameValue;
-    }
+    std::string &name() const { return nameValue; }
     bool operator==(const NamedObjectR<T> &rhs)
     {
         return nameValue == rhs.nameValue && objectValue == rhs.objectValue;
@@ -87,38 +98,42 @@ public:
         return *this;
     }
 
-    // friend std::ostream &operator<<(std::ostream &os, const NamedObjectR<int> &rhs); // not
-    // template
-    friend std::ostream &operator<<<T>(std::ostream &         os,
-                                       const NamedObjectR<T> &rhs);  // template bounded
-    template <typename B>
-    friend std::ostream &myShow(std::ostream &os, const B &b);  // tesmplate unbounded
+    // friend std::ostream &operator<<(std::ostream &os, const NamedObjectR<int>
+    // &rhs); // not template
+    friend std::ostream &
+    operator<<<T>(std::ostream &os,
+                  const NamedObjectR<T> &rhs);  // template bounded
+    template<typename B>
+    friend std::ostream &myShow(std::ostream &os,
+                                const B &b);  // tesmplate unbounded
 private:
     std::string nameValue;
-    T           objectValue;
+    T objectValue;
 };
 
 // std::ostream &operator<<(std::ostream &os, const NamedObjectR<int> &rhs)
 // {
-//     os << "not template " << "name: " << rhs.nameValue << " value: " << rhs.objectValue <<
-//     std::endl; return os;
+//     os << "not template " << "name: " << rhs.nameValue << " value: " <<
+//     rhs.objectValue << std::endl; return os;
 // }
 
-template <typename T>
+template<typename T>
 std::ostream &
 operator<<(std::ostream &os, const NamedObjectR<T> &rhs)
 {
     os << "template bounded "
-       << "name: " << rhs.nameValue << " value: " << rhs.objectValue << std::endl;
+       << "name: " << rhs.nameValue << " value: " << rhs.objectValue
+       << std::endl;
     return os;
 }
 
-template <typename B>
+template<typename B>
 std::ostream &
 myShow(std::ostream &os, const B &rhs)
 {
     os << "template unbunded "
-       << "name: " << rhs.nameValue << " value: " << rhs.objectValue << std::endl;
+       << "name: " << rhs.nameValue << " value: " << rhs.objectValue
+       << std::endl;
     return os;
 }
 
@@ -133,8 +148,8 @@ main(void)
     NamedObject<int> no1("Smallest Prime Number", 2);
     NamedObject<int> no2(no1);  // copy ct
 
-    std::string       name1 = "abc";
-    std::string       name2 = "xyz";
+    std::string name1 = "abc";
+    std::string name2 = "xyz";
     NamedObjectR<int> n1(name1, 1);
     NamedObjectR<int> n2(name2, 2);
 

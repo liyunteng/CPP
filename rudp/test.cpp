@@ -18,7 +18,7 @@ int
 log(int level, const char *fmt, ...)
 {
     (void)level;
-    int     n = 0;
+    int n = 0;
     va_list ap;
     va_start(ap, fmt);
     n += vprintf(fmt, ap);
@@ -33,8 +33,8 @@ test1()
     h.magic    = Rudp::RUDP_MAGIC;
     h.version  = Rudp::RUDP_VERSION_HEX;
     h.priority = Rudp::RUDP_PRIORITY_NORMAL;
-    h.module   = Rudp::RUDP_MODULE_ARQ | Rudp::RUDP_MODULE_FC | Rudp::RUDP_MODULE_DEBUG
-               | Rudp::RUDP_MODULE_PROFILE;
+    h.module   = Rudp::RUDP_MODULE_ARQ | Rudp::RUDP_MODULE_FC
+               | Rudp::RUDP_MODULE_DEBUG | Rudp::RUDP_MODULE_PROFILE;
     h.type      = Rudp::RUDP_TYPE_DATA;
     h.check_sum = 0;
     h.idx       = 0;
@@ -52,10 +52,10 @@ main(void)
     Rudp::rudp_addr_t to_addr;
     to_addr.ip   = "127.0.0.1";
     to_addr.port = 12346;
-    Rudp *r = new Rudp(Rudp::RUDP_MODULE_ARQ | Rudp::RUDP_MODULE_DEBUG, &my_addr, &to_addr, malloc,
-                       free, log);
-    char  x = '1';
-    char  buf[64][128];
+    Rudp *r      = new Rudp(Rudp::RUDP_MODULE_ARQ | Rudp::RUDP_MODULE_DEBUG,
+                       &my_addr, &to_addr, malloc, free, log);
+    char x       = '1';
+    char buf[64][128];
     for (int i = 0; i < 64; i++) {
         for (int j = 0; j < 126; j++) {
             buf[i][j] = x;
@@ -70,7 +70,7 @@ main(void)
         size = r->sendData(&buf[i], 128, &to_addr);
     }
     Rudp::rudp_addr_t from;
-    char              a[1024] = {0};
+    char a[1024] = {0};
     while ((size = r->recvData(&a, 1024, &from)) > 0) {
         // printf("recvfrom: %s:%d\n%s\n", from.ip.c_str(), from.port,
         // a);
