@@ -25,22 +25,22 @@
 #define STRINGBAD_HPP_
 #include <iostream>
 
-class StringBad {
-  public:
+class StringBad
+{
+public:
     StringBad();
     StringBad(const char *s);
     StringBad(StringBad &);
-    virtual ~ StringBad();
+    virtual ~StringBad();
 
     // friend
-    friend std::ostream & operator<<(std::ostream &, const StringBad &);
-     StringBad & operator=(const StringBad &);
+    friend std::ostream &operator<<(std::ostream &, const StringBad &);
+    StringBad &operator=(const StringBad &);
 
-  private:
+private:
     char *str;
     int len;
     static int num_strings;
 };
-
 
 #endif

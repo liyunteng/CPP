@@ -25,9 +25,9 @@
 #define FUNCTIONS_HPP
 #include "comm.h"
 
-class Functions {
+class Functions
+{
 public:
-
     Functions();
     ~Functions();
 
@@ -37,9 +37,10 @@ public:
     int avSetLayout4(int, int, int, int);
     int avSetLayout3(int, int, int);
     int avSetLayoutPip(int, int);
-    int avSetEncSolution(const char *,const char *);
+    int avSetEncSolution(const char *, const char *);
     int avSetEncBitsRate(const char *);
     int avSetEncIFramePeriod(const char *);
+
 private:
     void *context;
     void *request;

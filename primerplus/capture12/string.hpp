@@ -25,39 +25,38 @@
 #define STRING_HPP_
 #include <iostream>
 
-using std::ostream;
 using std::istream;
+using std::ostream;
 
-class String {
-  public:
+class String
+{
+public:
     // constructors
     String();
     String(const char *s);
-    String(const String & s);
-    virtual ~ String();
+    String(const String &s);
+    virtual ~String();
 
-  public:
-    int length() const {
-	return len;
-    } String & operator=(const String &);
-    String & operator=(const char *);
-    char &operator[] (int i);
-    const char &operator[] (int i) const;
+public:
+    int length() const { return len; }
+    String &operator=(const String &);
+    String &operator=(const char *);
+    char &operator[](int i);
+    const char &operator[](int i) const;
 
-    friend bool operator<(const String & s1, const String & s2);
-    friend bool operator>(const String & s1, const String & s2);
-    friend bool operator==(const String & s1, const String & s2);
-    friend ostream & operator<<(ostream & os, const String & s);
-    friend istream & operator>>(istream & is, String & s);
+    friend bool operator<(const String &s1, const String &s2);
+    friend bool operator>(const String &s1, const String &s2);
+    friend bool operator==(const String &s1, const String &s2);
+    friend ostream &operator<<(ostream &os, const String &s);
+    friend istream &operator>>(istream &is, String &s);
 
     static int HowMany();
-  private:
+
+private:
     char *str;
     int len;
     static int num_strings;
     static const int CINLIM = 80;
 };
-
-
 
 #endif

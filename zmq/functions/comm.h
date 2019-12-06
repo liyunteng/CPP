@@ -50,11 +50,10 @@ typedef struct _picture {
 } picture;
 
 typedef struct _video_enc_param {
-    int8_t encWidth[VIDEO_ENC_PARAM_LEN];   //[352 .. 1920]
-    int8_t encHeight[VIDEO_ENC_PARAM_LEN];  //[288 .. 1080]
-    int8_t
-        encBitRate[VIDEO_ENC_PARAM_LEN];  //[384000 512000 768000 1024000(1M)
-                                          //1920000(2M) 3840000(4M) 7680000(8M)]
+    int8_t encWidth[VIDEO_ENC_PARAM_LEN];    //[352 .. 1920]
+    int8_t encHeight[VIDEO_ENC_PARAM_LEN];   //[288 .. 1080]
+    int8_t encBitRate[VIDEO_ENC_PARAM_LEN];  //[384000 512000 768000 1024000(1M)
+        //1920000(2M) 3840000(4M) 7680000(8M)]
     int8_t IFramePeriod[VIDEO_ENC_PARAM_LEN];  //[30(1s) 60(2s) 120(4s) ...]
 
 } video_enc_param;

@@ -24,46 +24,43 @@
 #ifndef QUEUE_HPP_
 #define QUEUE_HPP_
 
-class Customer {
-  public:
-    Customer() {
-	arrive = processtime = 0;
-    } virtual ~ Customer() {
-    }
+class Customer
+{
+public:
+    Customer() { arrive = processtime = 0; }
+    virtual ~Customer() {}
 
     void set(long when);
-    long when() const {
-	return arrive;
-    } int ptime() const {
-	return processtime;
-  } private:
+    long when() const { return arrive; }
+    int ptime() const { return processtime; }
+
+private:
     long arrive;
     int processtime;
 };
 
 typedef Customer Item;
 
-class Queue {
-  public:
+class Queue
+{
+public:
     Queue(int qs = Q_SIZE);
-     virtual ~ Queue();
+    virtual ~Queue();
 
     bool isempty() const;
     bool isfull() const;
     int queuecount() const;
-    bool enqueue(const Item & item);
-    bool dequeue(Item & item);
+    bool enqueue(const Item &item);
+    bool dequeue(Item &item);
 
-  private:
-     Queue(const Queue &):qsize(0) {
-    } Queue & operator=(const Queue &) {
-	return *this;
-    }
+private:
+    Queue(const Queue &) : qsize(0) {}
+    Queue &operator=(const Queue &) { return *this; }
 
-  private:
+private:
     struct Node {
-	Item item;
-	struct Node *next;
+        Item item;
+        struct Node *next;
     };
     enum { Q_SIZE = 10 };
 
@@ -72,6 +69,5 @@ class Queue {
     int items;
     const int qsize;
 };
-
 
 #endif

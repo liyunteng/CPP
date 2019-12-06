@@ -26,51 +26,46 @@
 #include <iostream>
 
 namespace VECTOR {
-    class Vector {
-      public:
-	enum Mode { RECT, POL };
+class Vector
+{
+public:
+    enum Mode { RECT, POL };
 
-	 Vector();
-	 Vector(double n1, double n2, Mode form = RECT);
-	void reset(double n1, double n2, Mode form = RECT);
-	~Vector();
+    Vector();
+    Vector(double n1, double n2, Mode form = RECT);
+    void reset(double n1, double n2, Mode form = RECT);
+    ~Vector();
 
-      public:
-	void polarMode();
-	void rectMode();
+public:
+    void polarMode();
+    void rectMode();
 
-	double xVal() const {
-	    return m_x;
-	} double yVal() const {
-	    return m_y;
-	} double magVal() const {
-	    return m_mag;
-	} double angVal() const {
-	    return m_ang;
-	}
-	// operator Vector operator+(const Vector & v) const;
-	Vector operator-(const Vector & v) const;
-	Vector operator-() const;
-	Vector operator*(double n) const;
+    double xVal() const { return m_x; }
+    double yVal() const { return m_y; }
+    double magVal() const { return m_mag; }
+    double angVal() const { return m_ang; }
+    // operator Vector operator+(const Vector & v) const;
+    Vector operator-(const Vector &v) const;
+    Vector operator-() const;
+    Vector operator*(double n) const;
 
-	// friend
-	friend Vector operator*(double n, const Vector & v);
-	friend std::ostream & operator<<(std::ostream &, const Vector & v);
+    // friend
+    friend Vector operator*(double n, const Vector &v);
+    friend std::ostream &operator<<(std::ostream &, const Vector &v);
 
-      private:
-	void setMag();
-	void setAng();
-	void setX();
-	void setY();
+private:
+    void setMag();
+    void setAng();
+    void setX();
+    void setY();
 
-      private:
-	double m_x;
-	double m_y;
-	double m_mag;
-	double m_ang;
-	Mode m_mode;
+private:
+    double m_x;
+    double m_y;
+    double m_mag;
+    double m_ang;
+    Mode m_mode;
+};
 
-    };
-
-}				// VECTOR
+}  // namespace VECTOR
 #endif

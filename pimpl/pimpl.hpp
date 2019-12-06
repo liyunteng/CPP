@@ -26,14 +26,16 @@
 
 class Mypimpl;
 
-class A {
-    public:A();
+class A
+{
+public:
+    A();
     ~A();
 
     void print_i();
 
-  private:
-     Mypimpl * pimpl;
+private:
+    Mypimpl *pimpl;
 };
 
 #endif

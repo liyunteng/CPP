@@ -24,23 +24,23 @@
 #ifndef STONWT_HPP_
 #define STONWT_HPP_
 
-class StonWt {
-  public:
+class StonWt
+{
+public:
     StonWt();
     StonWt(int stn, double lbs = 0);
     StonWt(double lbs);
     ~StonWt();
 
-  public:
+public:
     void showLbs() const;
     void showStn() const;
 
-  private:
+private:
     enum { Lbs_per_stn = 14 };
     int stone;
     double pds_left;
     double pounds;
 };
-
 
 #endif

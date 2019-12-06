@@ -25,24 +25,24 @@
 #define MYTIME2_HPP
 #include <iostream>
 
-class Time {
-  public:
+class Time
+{
+public:
     Time();
     Time(int h, int m = 0);
     // virtual ~Time();
     void AddMin(int m);
     void AddHr(int h);
     void Reset(int h = 0, int m = 0);
-    Time operator+(const Time & t) const;
-    Time operator-(const Time & t) const;
+    Time operator+(const Time &t) const;
+    Time operator-(const Time &t) const;
     Time operator*(double n) const;
-    friend Time operator*(double n, const Time & t);
-    friend std::ostream & operator<<(std::ostream &, const Time & t);
+    friend Time operator*(double n, const Time &t);
+    friend std::ostream &operator<<(std::ostream &, const Time &t);
 
-  private:
+private:
     int m_hours;
     int m_minutes;
 };
-
 
 #endif

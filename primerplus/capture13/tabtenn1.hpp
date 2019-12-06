@@ -27,42 +27,38 @@
 #include <string>
 using std::string;
 
-class TabelTennisPlayer {
-  public:
-    TabelTennisPlayer(const string & fn = "none",
-		      const string & ln = "none", bool ht = false);
-    virtual ~ TabelTennisPlayer() {
-  } public:
-    void Name() const;
-    bool HasTabel() const {
-	return hasTabel;
-    } void ResetTabel(bool v) {
-	hasTabel = v;
-    }
+class TabelTennisPlayer
+{
+public:
+    TabelTennisPlayer(const string &fn = "none", const string &ln = "none",
+                      bool ht = false);
+    virtual ~TabelTennisPlayer() {}
 
-  private:
+public:
+    void Name() const;
+    bool HasTabel() const { return hasTabel; }
+    void ResetTabel(bool v) { hasTabel = v; }
+
+private:
     string firstName;
     string lastName;
     bool hasTabel;
 };
 
-class RetedPlayer:public TabelTennisPlayer {
-  public:
-    RetedPlayer(unsigned int r = 0, const string & fn = "none",
-		const string & ln = "none", bool ht = false);
+class RetedPlayer : public TabelTennisPlayer
+{
+public:
+    RetedPlayer(unsigned int r = 0, const string &fn = "none",
+                const string &ln = "none", bool ht = false);
     explicit RetedPlayer(unsigned int r, const TabelTennisPlayer &);
-    virtual ~ RetedPlayer() {
-  } public:
-    unsigned int Rating() const {
-	return rating;
-    } void ResetRating(unsigned r) {
-	rating = r;
-    }
+    virtual ~RetedPlayer() {}
 
-  private:
+public:
+    unsigned int Rating() const { return rating; }
+    void ResetRating(unsigned r) { rating = r; }
+
+private:
     unsigned int rating;
 };
-
-
 
 #endif

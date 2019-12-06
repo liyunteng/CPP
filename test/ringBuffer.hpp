@@ -28,83 +28,93 @@
 // #define NDEBUG
 #include <iostream>
 
-
-
-template < typename T > class ringBuffer {
-  private:
+template<typename T>
+class ringBuffer
+{
+private:
     size_t m_size;
     T *m_data;
     size_t m_front;
     size_t m_rear;
 
-  public:
+public:
     explicit ringBuffer(size_t n);
-    virtual ~ ringBuffer();
+    virtual ~ringBuffer();
 
     bool isEmpty();
     bool isFull();
     size_t size();
-    void push(const T & t) throw(std::logic_error);
+    void push(const T &t) throw(std::logic_error);
     T pop() throw(std::logic_error);
 };
 
-template < typename T > ringBuffer < T >::ringBuffer(size_t n)
-:  m_size(n + 1), m_front(0), m_rear(0)
+template<typename T>
+ringBuffer<T>::ringBuffer(size_t n) : m_size(n + 1), m_front(0), m_rear(0)
 {
     m_data = new T[m_size];
 }
 
-template < typename T > ringBuffer < T >::~ringBuffer()
+template<typename T>
+ringBuffer<T>::~ringBuffer()
 {
     if (m_data) {
 #ifndef NDEBUG
-	std::cout << "delete..." << std::endl;
+        std::cout << "delete..." << std::endl;
 #endif
-	delete[]m_data;
+        delete[] m_data;
     }
 }
 
-template < typename T > bool ringBuffer < T >::isEmpty()
+template<typename T>
+bool
+ringBuffer<T>::isEmpty()
 {
     return m_front == m_rear % m_size;
 }
 
-template < typename T > bool ringBuffer < T >::isFull()
+template<typename T>
+bool
+ringBuffer<T>::isFull()
 {
     return m_front == (m_rear + 1) % m_size;
 }
 
-template < typename T >
-    void ringBuffer < T >::push(const T & t) throw(std::logic_error)
+template<typename T>
+void
+ringBuffer<T>::push(const T &t) throw(std::logic_error)
 {
     if (isFull()) {
 #ifndef NDEBUG
-	std::cout << "ringBuffer is full" << std::endl;
-	throw std::logic_error("is Full");
+        std::cout << "ringBuffer is full" << std::endl;
+        throw std::logic_error("is Full");
 #endif
-	return;
+        return;
     }
 
     m_data[m_rear] = t;
-    m_rear = (m_rear + 1) % m_size;
+    m_rear         = (m_rear + 1) % m_size;
 }
 
-template < typename T > T ringBuffer < T >::pop()throw(std::logic_error)
+template<typename T>
+T
+ringBuffer<T>::pop() throw(std::logic_error)
 {
     if (isEmpty()) {
 #ifndef NDEBUG
-	std::cout << "ringBuffer is Empty" << std::endl;
-	throw std::logic_error("is Empty");
+        std::cout << "ringBuffer is Empty" << std::endl;
+        throw std::logic_error("is Empty");
 #endif
-	T t;
-	return t;
+        T t;
+        return t;
     }
-    T tmp = m_data[m_front];
+    T tmp   = m_data[m_front];
     m_front = (m_front + 1) % m_size;
     return tmp;
 }
 
-template < typename T > size_t ringBuffer < T >::size()
+template<typename T>
+size_t
+ringBuffer<T>::size()
 {
     return m_size - 1;
 }

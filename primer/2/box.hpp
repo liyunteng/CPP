@@ -20,28 +20,36 @@ public:
     explicit Box(size_t l = 1, size_t w = 1, size_t h = 1) :
         length{l},
         width{w},
-        height{h} {}
+        height{h}
+    {
+    }
 
-    double volume() const {return length * width * height;}
-    bool operator<(const Box& box) const {return volume() < box.volume();}
-    bool operator==(const Box& box) const {return length == box.length &&
-            width == box.width && height == box.height;}
+    double volume() const { return length * width * height; }
+    bool operator<(const Box &box) const { return volume() < box.volume(); }
+    bool operator==(const Box &box) const
+    {
+        return length == box.length && width == box.width
+               && height == box.height;
+    }
 
-    friend std::istream& operator>>(std::istream& in, Box& box);
-    friend std::ostream& operator<<(std::ostream& out, const Box& box);
+    friend std::istream &operator>>(std::istream &in, Box &box);
+    friend std::ostream &operator<<(std::ostream &out, const Box &box);
 
 private:
-    size_t length {};
-    size_t width {};
-    size_t height {};
+    size_t length{};
+    size_t width{};
+    size_t height{};
 };
 
-inline std::istream& operator>>(std::istream& in, Box& box)
+inline std::istream &
+operator>>(std::istream &in, Box &box)
 {
-    std::cout << "Enter box length, width, height separated by space - Ctrl+Z to end: ";
+    std::cout << "Enter box length, width, height separated by space - Ctrl+Z "
+                 "to end: ";
     size_t value;
     in >> value;
-    if (in.eof()) return in;
+    if (in.eof())
+        return in;
 
     box.length = value;
     in >> value;
@@ -51,9 +59,11 @@ inline std::istream& operator>>(std::istream& in, Box& box)
     return in;
 }
 
-inline std::ostream& operator<<(std::ostream& out, const Box& box)
+inline std::ostream &
+operator<<(std::ostream &out, const Box &box)
 {
-    out << "Box(" << box.length << "," << box.width << "," << box.height<< ") ";
+    out << "Box(" << box.length << "," << box.width << "," << box.height
+        << ") ";
     return out;
 }
 #endif

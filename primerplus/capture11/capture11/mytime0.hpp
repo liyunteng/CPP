@@ -24,22 +24,22 @@
 #ifndef MYTIME0_HPP
 #define MYTIME0_HPP
 
-class Time {
-  public:
+class Time
+{
+public:
     Time();
     Time(int h, int m = 0);
-     virtual ~ Time();
+    virtual ~Time();
 
     void AddMin(int m);
     void AddHour(int h);
     void Reset(int h = 0, int m = 0);
-    Time Sum(const Time & t) const;
+    Time Sum(const Time &t) const;
     void Show() const;
 
-  private:
+private:
     int m_hours;
     int m_minutes;
 };
-
 
 #endif

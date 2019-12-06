@@ -24,6 +24,4 @@
 #ifndef REGEX_HPP
 #define REGEX_HPP
 
-
-
 #endif
