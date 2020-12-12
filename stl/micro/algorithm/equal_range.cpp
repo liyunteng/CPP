@@ -16,7 +16,7 @@ dump_vector(
     pair<typename vector<T>::iterator, typename vector<T>::iterator> range)
 {
     for (typename vector<T>::const_iterator i = v.begin(); i != v.end(); ++i) {
-        if (i == range.first()) {
+        if (i == range.first) {
             cout << "[ ";
         }
         if (i == range.second) {
@@ -30,7 +30,7 @@ dump_vector(
 
 template<typename T>
 void
-euqal_range_demo(const vector<T> &original_vector, T value)
+equal_range_demo(const vector<T> &original_vector, T value)
 {
     vector<T> v(original_vector);
 
@@ -45,7 +45,7 @@ euqal_range_demo(const vector<T> &original_vector, T value)
         equal_range(v.begin(), v.end(), value);
     cout << "result of equal_range with value = " << value << ":" << endl
          << '\t';
-    dump_vecotr(v, result);
+    dump_vector(v, result);
     cout << endl;
 }
 
@@ -77,12 +77,14 @@ abs_lesser(int elem1, int elem2)
     return abs(elem1) < abs(elem2);
 }
 
-bool shorter_than(const string&l, const string& r)
+bool
+shorter_than(const string &l, const string &r)
 {
     return l.size() < r.size();
 }
 
-int main(void)
+int
+main(void)
 {
     vector<int> v1;
 
@@ -105,7 +107,7 @@ int main(void)
     v2.push_back("kittens");
     v2.push_back("fun");
     v2.push_back("meowmeowmeow");
-    v2.psuh_back("blah");
+    v2.push_back("blah");
 
     equal_range_demo<string>(v2, "fred");
     equal_range_demo<string>(v2, "fred", shorter_than, "shorter_than");
