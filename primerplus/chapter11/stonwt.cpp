@@ -1,10 +1,10 @@
 /*
- * client_lib.hpp -- zmq client
+ * stonwt.cpp -- ston wt
  *
- * Copyright (C) 2015 liyunteng
+ * Copyright (C) 2016 liyunteng
  * Auther: liyunteng <li_yunteng@163.com>
  * License: GPL
- * Update time:  2015/07/14 19:23:34
+ * Update time:  2016/11/16 11:29:11
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms and conditions of the GNU General Public License,
@@ -21,31 +21,38 @@
  *
  */
 
-#ifndef FUNCTIONS_HPP
-#define FUNCTIONS_HPP
-#include "comm.h"
+#include "stonwt.hpp"
+#include <iostream>
 
-class Functions
+void
+StonWt::showStn() const
 {
-public:
-    Functions();
-    ~Functions();
+    std::cout << pounds << " pounds\n";
+}
 
-    int init();
-    int avStart();
-    int avSetLayout(picture pic[4]);
-    int avSetLayout4(int, int, int, int);
-    int avSetLayout3(int, int, int);
-    int avSetLayoutPip(int, int);
-    int avSetEncSolution(const char *, const char *);
-    int avSetEncBitsRate(const char *);
-    int avSetEncIFramePeriod(const char *);
+void
+StonWt::showLbs() const
+{
+    std::cout << stone << " stone, " << pds_left << " pounds." << std::endl;
+}
 
-private:
-    void *context;
-    void *request;
-    bool inited;
-    int getReturn();
-};
+StonWt::StonWt()
+{
+    stone = pounds = pds_left = 0;
+}
 
-#endif
+StonWt::StonWt(int stn, double lbs)
+{
+    stone    = stn;
+    pds_left = lbs;
+    pounds   = stn * Lbs_per_stn + pds_left;
+}
+
+StonWt::StonWt(double lbs)
+{
+    stone    = int(lbs) / Lbs_per_stn;
+    pds_left = int(lbs) % Lbs_per_stn;
+    pounds   = lbs;
+}
+
+StonWt::~StonWt() {}

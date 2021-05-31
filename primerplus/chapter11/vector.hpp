@@ -44,7 +44,7 @@ public:
     double yVal() const { return m_y; }
     double magVal() const { return m_mag; }
     double angVal() const { return m_ang; }
-    // operator Vector operator+(const Vector & v) const;
+    Vector operator+(const Vector & v) const;
     Vector operator-(const Vector &v) const;
     Vector operator-() const;
     Vector operator*(double n) const;

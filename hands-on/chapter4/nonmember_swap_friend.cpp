@@ -7,6 +7,7 @@
 using std::swap;
 
 namespace N {
+
 class C
 {
 public:
@@ -15,9 +16,7 @@ public:
     {
         std::cout << __PRETTY_FUNCTION__ << std::endl;
     }
-    ~C() {
-        std::cout << __PRETTY_FUNCTION__ << std::endl;
-    }
+    ~C() { std::cout << __PRETTY_FUNCTION__ << std::endl; }
     C &operator=(const C &rhs)
     {
         i_ = rhs.i_;
@@ -36,6 +35,7 @@ public:
     }
     int i_;
 };
+
 }  // namespace N
 
 int

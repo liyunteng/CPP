@@ -24,7 +24,8 @@ private:
     int value_;
 };
 
-int main(void)
+int
+main(void)
 {
     std::cout << Singleton::instance().get() << std::endl;
     Singleton::instance().get()++;

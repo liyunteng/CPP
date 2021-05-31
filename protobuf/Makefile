@@ -1,9 +1,17 @@
-all: proto test.cpp
-	clang++ -o test test.cpp person.pb.cc -lprotobuf
+PROJECT_ROOT ?= $(abspath ..)
+include $(PROJECT_ROOT)/build/def.mk
 
+SOURCE_DIRS = .
+
+LDLIBS += -lprotobuf
+
+include $(PROJECT_ROOT)/build/bin.mk
+
+OBJECT_CXX += person.pb.cc
+${OBJECT_CXX}: proto 
 proto: person.proto
-	protoc --cpp_out=. $^
+	protoc --cpp_out=./ $^ 
 
-.PHONY: clean
-clean:
-	@rm -rf tmp test *.o person.pb.*
+clean: clean-x
+clean-x:
+	@rm -rf person.pb.*

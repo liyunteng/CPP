@@ -44,8 +44,8 @@ public:
     bool isEmpty();
     bool isFull();
     size_t size();
-    void push(const T &t) throw(std::logic_error);
-    T pop() throw(std::logic_error);
+    void push(const T &t);
+    T pop();
 };
 
 template<typename T>
@@ -81,7 +81,7 @@ ringBuffer<T>::isFull()
 
 template<typename T>
 void
-ringBuffer<T>::push(const T &t) throw(std::logic_error)
+ringBuffer<T>::push(const T &t) 
 {
     if (isFull()) {
 #ifndef NDEBUG
@@ -97,7 +97,7 @@ ringBuffer<T>::push(const T &t) throw(std::logic_error)
 
 template<typename T>
 T
-ringBuffer<T>::pop() throw(std::logic_error)
+ringBuffer<T>::pop() 
 {
     if (isEmpty()) {
 #ifndef NDEBUG

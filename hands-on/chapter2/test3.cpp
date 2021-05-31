@@ -3,10 +3,12 @@
 // Date   : 2020/12/09
 #include <iostream>
 
-template<typename T, size_t N>
-class Array {
+template <typename T, size_t N>
+class Array
+{
 public:
-    T& operator[](size_t i) {
+    T &operator[](size_t i)
+    {
         if (i >= N) throw std::out_of_range("Bad index");
         return data_[i];
     }
@@ -15,7 +17,8 @@ private:
     T data_[N];
 };
 
-int main(void)
+int
+main(void)
 {
     Array<int, 3> a;
     a[0] = 0;

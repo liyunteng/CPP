@@ -65,3 +65,8 @@ Set<T>::size() const
 {
     return rep.size();
 }
+
+int main(void)
+{
+    return 0;
+}

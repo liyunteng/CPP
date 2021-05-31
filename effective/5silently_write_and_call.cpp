@@ -84,7 +84,7 @@ public:
     }
     ~NamedObjectR() {}
 
-    std::string &name() const { return nameValue; }
+    const std::string &name() const { return nameValue; }
     bool operator==(const NamedObjectR<T> &rhs)
     {
         return nameValue == rhs.nameValue && objectValue == rhs.objectValue;

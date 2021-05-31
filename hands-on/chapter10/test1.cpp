@@ -3,6 +3,7 @@
 // Date   : 2020/12/09
 
 #include <iostream>
+#include <cstring>
 
 class small_string
 {

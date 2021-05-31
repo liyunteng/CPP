@@ -29,7 +29,7 @@
 using namespace std;
 using namespace boost;
 
-regex expression("^select([a-zA-z ]*)from([a-zA-Z ]*)");
+regex expression("^select([a-z]*)from([a-zA-Z ]*)");
 
 int
 main(void)
@@ -37,7 +37,7 @@ main(void)
     std::string in;
     cmatch what;
 
-    cout << "Enter testing string: " << endl;
+    cout << "Enter testing string: ";
     getline(cin, in);
 
     if (regex_match(in.c_str(), what, expression)) {

@@ -3,13 +3,17 @@
 // Date   : 2020/12/09
 #include <iostream>
 
-template<typename T>
-T increment(T x) {
+template <typename T>
+T
+increment(T x)
+{
     return x + 1;
 }
 
-template<typename T>
-T sum(T from, T to, T step) {
+template <typename T>
+T
+sum(T from, T to, T step)
+{
     T res = from;
     while ((from += step) < to) {
         res += from;
@@ -17,24 +21,20 @@ T sum(T from, T to, T step) {
     return res;
 }
 
-template<typename T>
-class ArrayOf2 {
+template <typename T>
+class ArrayOf2
+{
 public:
-    T& operator[](size_t i) {
-        return a_[i];
-    }
-    const T& operator[](size_t i) const {
-        return a_[i];
-    }
-    T sum() const {
-        return a_[0] + a_[1];
-    }
+    T &operator[](size_t i) { return a_[i]; }
+    const T &operator[](size_t i) const { return a_[i]; }
+    T sum() const { return a_[0] + a_[1]; }
 
 private:
     T a_[2];
 };
 
-int main(void)
+int
+main(void)
 {
     std::cout << increment(5) << std::endl;
     std::cout << increment(5.1) << std::endl;

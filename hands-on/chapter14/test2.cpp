@@ -22,7 +22,8 @@ private:
 class Derived : public Base
 {
 private:
-    virtual void Step2() {
+    virtual void Step2()
+    {
         std::cout << __PRETTY_FUNCTION__ << std::endl;
     }
 };
@@ -30,12 +31,14 @@ private:
 class Derived2 : public Base
 {
 private:
-    virtual void Step2() {
+    virtual void Step2()
+    {
         std::cout << __PRETTY_FUNCTION__ << std::endl;
     }
 };
 
-int main(void)
+int
+main(void)
 {
     Derived2 d;
     d.TheAlgorithm();

@@ -1,20 +1,23 @@
 // member_swap.cpp - member_swap
 
 // Date   : 2020/12/09
-#include <utility>
 #include <iostream>
+#include <utility>
 
-class C {
+class C
+{
 public:
-    explicit C(int i): i_(i) {}
-    void swap(C& rhs) noexcept {
+    explicit C(int i) : i_(i) {}
+    void swap(C &rhs) noexcept
+    {
         using std::swap;
         swap(i_, rhs.i_);
     }
     int i_;
 };
 
-int main(void)
+int
+main(void)
 {
     C c1(1), c2(2);
 

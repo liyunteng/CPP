@@ -2,35 +2,46 @@
 
 // Date   : 2020/12/09
 #include <iostream>
+#include <memory>
 using namespace std;
 
 class CB;
-class CA {
+class CA
+{
 public:
-    CA() {cout << __PRETTY_FUNCTION__ << endl;}
-    ~CA() { cout << __PRETTY_FUNCTION__ << endl;}
+    CA() { cout << __PRETTY_FUNCTION__ << endl; }
+    ~CA() { cout << __PRETTY_FUNCTION__ << endl; }
 
-    void set_ptr(shared_ptr<CB>& ptr) {m_ptr_b  = ptr;}
-    void b_use_count() { cout << "b use count: " << m_ptr_b.use_count() << endl;}
-    void show() { cout << "this is class CA!" << endl;}
+    void set_ptr(shared_ptr<CB> &ptr) { m_ptr_b = ptr; }
+    void b_use_count()
+    {
+        cout << "b use count: " << m_ptr_b.use_count() << endl;
+    }
+    void show() { cout << "this is class CA!" << endl; }
 
 private:
     shared_ptr<CB> m_ptr_b;
 };
 
-class CB {
+class CB
+{
 public:
-    CB() {cout << __PRETTY_FUNCTION__ << endl;}
-    ~CB() {cout << __PRETTY_FUNCTION__ << endl;}
-    void set_ptr(shared_ptr<CA>& ptr) {m_ptr_a = ptr;}
-    void a_use_count() {cout << "a use count: " << m_ptr_a.use_count() << endl;}
-    void show() { cout << "this is class CB!" << endl;}
+    CB() { cout << __PRETTY_FUNCTION__ << endl; }
+    ~CB() { cout << __PRETTY_FUNCTION__ << endl; }
+    void set_ptr(shared_ptr<CA> &ptr) { m_ptr_a = ptr; }
+    void a_use_count()
+    {
+        cout << "a use count: " << m_ptr_a.use_count() << endl;
+    }
+    void show() { cout << "this is class CB!" << endl; }
+
 private:
     // shared_ptr<CA> m_ptr_a;
     weak_ptr<CA> m_ptr_a;
 };
 
-int main(void)
+int
+main(void)
 {
     shared_ptr<CA> ptr_a(new CA());
     shared_ptr<CB> ptr_b(new CB());

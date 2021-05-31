@@ -3,9 +3,11 @@
 // Date   : 2020/12/09
 #include <iostream>
 
-class Singleton {
+class Singleton
+{
 public:
-    static int& get() {return value_;}
+    static int &get() { return value_; }
+
 private:
     Singleton() = delete;
     static int value_;
@@ -13,8 +15,8 @@ private:
 
 int Singleton::value_ = 0;
 
-
-int main(void)
+int
+main(void)
 {
     std::cout << Singleton::get() << std::endl;
     Singleton::get()++;

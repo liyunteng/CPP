@@ -24,7 +24,7 @@
 #include "vector.hpp"
 #include <cmath>
 
-namespace VECTOR {
+using namespace VECTOR;
 
 const double Rad_to_deb = 45.0 / atan(1.0);
 
@@ -136,9 +136,10 @@ Vector Vector::operator*(double n) const
 {
     return Vector(m_x * n, m_y * n);
 }
-// friend operator Vector operator*(double n, const Vector & v) {
-return v * n;
-}  // namespace VECTOR
+
+Vector operator*(double n, const Vector & v) {
+    return v * n;
+}  
 
 std::ostream &
 operator<<(std::ostream &os, const Vector &v)
@@ -152,5 +153,3 @@ operator<<(std::ostream &os, const Vector &v)
     }
     return os;
 }
-
-}  // VECTOR

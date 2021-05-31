@@ -3,11 +3,11 @@
 // Date   : 2020/12/09
 #include <iostream>
 
-template<typename T>
+template <typename T>
 constexpr T pi = T(3.14159265358L);
 
-
-int main(void)
+int
+main(void)
 {
     std::cout << pi<int> << " " << pi<float> << " " << pi<double> << std::endl;
     return 0;

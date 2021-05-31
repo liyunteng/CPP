@@ -20,13 +20,15 @@ private:
     Singleton(const Singleton &) = delete;
     Singleton &operator=(const Singleton &) = delete;
     ~Singleton() { std::cout << __PRETTY_FUNCTION__ << std::endl; }
+
 private:
     int value_;
     static Singleton inst_;
 };
 Singleton Singleton::inst_;
 
-int main(void)
+int
+main(void)
 {
     std::cout << Singleton::instance().get() << std::endl;
     Singleton::instance().get()++;

@@ -55,3 +55,7 @@ ABEntry::ABEntry(const std::string &name, const std::string &address,
     // thePhones = phones;
     // numTimesConsulted = 0;
 }
+int main(void)
+{
+    return 0;
+}

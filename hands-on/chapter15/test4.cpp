@@ -4,13 +4,14 @@
 #include <iostream>
 
 struct SingletonImpl;
-class Singleton {
+class Singleton
+{
 public:
     int &get();
+
 private:
     static SingletonImpl &impl();
 };
-
 
 struct SingletonImpl {
     SingletonImpl() : value_(0) {}
@@ -23,13 +24,15 @@ Singleton::get()
     return impl().value_;
 }
 
-SingletonImpl &Singleton::impl() {
+SingletonImpl &
+Singleton::impl()
+{
     static SingletonImpl inst;
     return inst;
 };
 
-
-int main(void)
+int
+main(void)
 {
     std::cout << Singleton().get() << std::endl;
     Singleton().get()++;
